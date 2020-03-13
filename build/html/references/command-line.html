@@ -1,0 +1,947 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>命令行参考 &mdash; Bluehelix Chain v0.1 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="BHChain API" href="swagger.html" />
+    <link rel="prev" title="主要模块概述" href="../moudle/moudle.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">首页</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Bluehelix Chain简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../home.html#id1">创新优势</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../home.html#id2">技术原理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../home.html#id3">整体架构</a></li>
+</ul>
+<p class="caption"><span class="caption-text">用户指南</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guide/quick-start.html">快速启动</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guide/quick-start.html#id2">启动币核链全节点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/quick-start.html#id3">与币核链进行交互</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/quick-start.html#id4">1. 创建和管理币核链托管单元</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/quick-start.html#id5">2. 创建以太坊的跨链托管地址</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/quick-start.html#id6">3. 充入跨链资产</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/quick-start.html#id7">4. 跨链资产转账</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/quick-start.html#id8">5. 提出跨链资产</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">模块说明</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moudle/moudle.html">主要模块概述</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../moudle/moudle.html#id2">托管单元模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../moudle/moudle.html#id3">转账模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../moudle/moudle.html#id4">密钥生成模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../moudle/moudle.html#id5">代币模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../moudle/moudle.html#id6">订单模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../moudle/moudle.html#id7">提案模块</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API参考</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">命令行参考</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#status">status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#config">config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#query">query</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#validators">查询当前validators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">示例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">成功返回</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">查询指定高度的区块内容</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">示例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">成功返回</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#txs">txs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id7">示例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">成功返回</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#hash">根据hash查找交易</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id9">示例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">成功返回</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#token">token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#order">order</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">查询token发行数量</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id12">示例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">成功返回</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mint">mint</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id14">示例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">成功返回</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cu">cu</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tx">tx</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gov">gov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#staking">staking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#distribution">distribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transfer">transfer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bhex">bhex系统内部转账</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18">成功返回</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id19">将外链资产充值到bhex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id23">将资产提现到外链地址</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rest-server">rest-server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#keys">keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version">version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#help">help</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="swagger.html">BHChain API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#transactions">Transactions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-txs-hash">get__txs_{hash}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#post-txs">post__txs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#post-txs-encode">post__txs_encode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#tendermint-rpc">Tendermint RPC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-node-info">get__node_info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-syncing">get__syncing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-blocks-latest">get__blocks_latest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-blocks-height">get__blocks_{height}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-validatorsets-latest">get__validatorsets_latest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-validatorsets-height">get__validatorsets_{height}</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#cu">Cu</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-cu-cus-address">get__cu_cus_{address}</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#staking">Staking</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-staking-delegators-delegatoraddr-delegations">get__staking_delegators_{delegatorAddr}_delegations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#post-staking-delegators-delegatoraddr-delegations">post__staking_delegators_{delegatorAddr}_delegations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-staking-delegators-delegatoraddr-delegations-validatoraddr">get__staking_delegators_{delegatorAddr}<em>delegations</em>{validatorAddr}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-staking-delegators-delegatoraddr-unbonding-delegations">get__staking_delegators_{delegatorAddr}_unbonding_delegations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#post-staking-delegators-delegatoraddr-unbonding-delegations">post__staking_delegators_{delegatorAddr}_unbonding_delegations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-staking-delegators-delegatoraddr-unbonding-delegations-validatoraddr">get__staking_delegators_{delegatorAddr}<em>unbonding_delegations</em>{validatorAddr}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-staking-redelegations">get__staking_redelegations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#post-staking-delegators-delegatoraddr-redelegations">post__staking_delegators_{delegatorAddr}_redelegations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-staking-delegators-delegatoraddr-validators">get__staking_delegators_{delegatorAddr}_validators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-staking-delegators-delegatoraddr-validators-validatoraddr">get__staking_delegators_{delegatorAddr}<em>validators</em>{validatorAddr}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-staking-validators">get__staking_validators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-staking-validators-validatoraddr">get__staking_validators_{validatorAddr}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-staking-validators-validatoraddr-delegations">get__staking_validators_{validatorAddr}_delegations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-staking-validators-validatoraddr-unbonding-delegations">get__staking_validators_{validatorAddr}_unbonding_delegations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-staking-pool">get__staking_pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-staking-parameters">get__staking_parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#governance">Governance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#post-gov-proposals">post__gov_proposals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-gov-proposals">get__gov_proposals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#post-gov-proposals-param-change">post__gov_proposals_param_change</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-gov-proposals-proposalid">get__gov_proposals_{proposalId}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-gov-proposals-proposalid-proposer">get__gov_proposals_{proposalId}_proposer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-gov-proposals-proposalid-deposits">get__gov_proposals_{proposalId}_deposits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#post-gov-proposals-proposalid-deposits">post__gov_proposals_{proposalId}_deposits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-gov-proposals-proposalid-deposits-depositor">get__gov_proposals_{proposalId}<em>deposits</em>{depositor}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-gov-proposals-proposalid-votes">get__gov_proposals_{proposalId}_votes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#post-gov-proposals-proposalid-votes">post__gov_proposals_{proposalId}_votes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-gov-proposals-proposalid-votes-voter">get__gov_proposals_{proposalId}<em>votes</em>{voter}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-gov-proposals-proposalid-tally">get__gov_proposals_{proposalId}_tally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-gov-parameters-deposit">get__gov_parameters_deposit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-gov-parameters-tallying">get__gov_parameters_tallying</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-gov-parameters-voting">get__gov_parameters_voting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#distribution">Distribution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-distribution-delegators-delegatoraddr-rewards">get__distribution_delegators_{delegatorAddr}_rewards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#post-distribution-delegators-delegatoraddr-rewards">post__distribution_delegators_{delegatorAddr}_rewards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-distribution-delegators-delegatoraddr-rewards-validatoraddr">get__distribution_delegators_{delegatorAddr}<em>rewards</em>{validatorAddr}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#post-distribution-delegators-delegatoraddr-rewards-validatoraddr">post__distribution_delegators_{delegatorAddr}<em>rewards</em>{validatorAddr}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-distribution-delegators-delegatoraddr-withdraw-address">get__distribution_delegators_{delegatorAddr}_withdraw_address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#post-distribution-delegators-delegatoraddr-withdraw-address">post__distribution_delegators_{delegatorAddr}_withdraw_address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-distribution-validators-validatoraddr">get__distribution_validators_{validatorAddr}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-distribution-validators-validatoraddr-outstanding-rewards">get__distribution_validators_{validatorAddr}_outstanding_rewards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-distribution-validators-validatoraddr-rewards">get__distribution_validators_{validatorAddr}_rewards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#post-distribution-validators-validatoraddr-rewards">post__distribution_validators_{validatorAddr}_rewards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-distribution-community-pool">get__distribution_community_pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-distribution-parameters">get__distribution_parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#supply">Supply</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-supply-total">get__supply_total</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-supply-total-denomination">get__supply_total_{denomination}</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#slashing">Slashing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-slashing-signing-infos">get__slashing_signing_infos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#post-slashing-validators-validatoraddr-unjail">post__slashing_validators_{validatorAddr}_unjail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-slashing-parameters">get__slashing_parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#mint">Mint</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-minting-parameters">get__minting_parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-minting-inflation">get__minting_inflation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-minting-annual-provisions">get__minting_annual-provisions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#token">Token</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-token-info-denom">get__token_info_{denom}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-token-listalltokens">get__token_listalltokens</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#order">Order</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get-order-info-orderid">get__order_info_{orderId}</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#datastructure">DataStructure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#checktxresult">CheckTxResult</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#properties">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#delivertxresult">DeliverTxResult</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id1">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#broadcasttxcommitresult">BroadcastTxCommitResult</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id2">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#kvpair">KVPair</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id3">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#msg">Msg</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id4">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#address">Address</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id5">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#validatoraddress">ValidatorAddress</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id6">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#coin">Coin</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id7">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#hash">Hash</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id8">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#txquery">TxQuery</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id9">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#stdtx">StdTx</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id10">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#blockid">BlockID</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id11">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#blockheader">BlockHeader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id12">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#block">Block</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id13">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#blockquery">BlockQuery</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id14">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#delegationdelegatorreward">DelegationDelegatorReward</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id15">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#delegatortotalrewards">DelegatorTotalRewards</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id16">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#basereq">BaseReq</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id17">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#tendermintvalidator">TendermintValidator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id18">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#textproposal">TextProposal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id19">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#proposer">Proposer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id20">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#deposit">Deposit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id21">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#tallyresult">TallyResult</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id22">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#cukeygen">CUKeyGen</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id23">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#cudeposit">CUDeposit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id24">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#cuwithdrawal">CUWithdrawal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id25">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#vote">Vote</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id26">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#validator">Validator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id27">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#delegation">Delegation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id28">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#unbondingdelegationpair">UnbondingDelegationPair</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id29">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#unbondingentries">UnbondingEntries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id30">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#unbondingdelegation">UnbondingDelegation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id31">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#redelegation">Redelegation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id32">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#redelegationentry">RedelegationEntry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id33">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#validatordistinfo">ValidatorDistInfo</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id34">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#publickey">PublicKey</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id35">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#signinginfo">SigningInfo</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id36">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#paramchange">ParamChange</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id37">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id38">Supply</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id39">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id40">Token</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id41">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#basictoken">BasicToken</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id42">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id43">Order</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id44">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#orderkeygen">OrderKeyGen</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id45">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#ordercollect">OrderCollect</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id46">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#orderwithdrawal">OrderWithdrawal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id47">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#ordersystransfer">OrderSysTransfer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="swagger.html#id48">Properties</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">常见问题</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#bluehelix-chain">什么是Bluehelix Chain？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#bluhelix-chain">如何加入Bluhelix Chain测试网？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#id1">如果获取测试代币？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#erc20">如何测试erc20代币的托管充值提现流程？</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Bluehelix Chain</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>命令行参考</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/references/command-line.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>命令行参考<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="status">
+<h2>status<a class="headerlink" href="#status" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="config">
+<h2>config<a class="headerlink" href="#config" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="query">
+<h2>query<a class="headerlink" href="#query" title="永久链接至标题">¶</a></h2>
+<div class="section" id="validators">
+<h3>查询当前validators<a class="headerlink" href="#validators" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id2">
+<h4>示例<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bhcli</span> <span class="n">query</span> <span class="n">tendermint</span><span class="o">-</span><span class="n">validator</span><span class="o">-</span><span class="nb">set</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h4>成功返回<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;block_height&quot;</span><span class="p">:</span> <span class="s2">&quot;283&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;validators&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;bhvalcons14rs62gppmu89l0dgdnelvxua06cx4jqhrpjtqz&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;pub_key&quot;</span><span class="p">:</span> <span class="s2">&quot;bhvalconspub1zcjduepqu6luln9tr2pvapag4gg7lydreqmfw3f3jm0xx5hmwjq2x0mluy8qjczv5x&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;proposer_priority&quot;</span><span class="p">:</span> <span class="s2">&quot;-100&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;voting_power&quot;</span><span class="p">:</span> <span class="s2">&quot;100&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;bhvalcons1h0muy2683gyp6ra2qph9hxwdfmxzw6x4xtkm8m&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;pub_key&quot;</span><span class="p">:</span> <span class="s2">&quot;bhvalconspub1zcjduepq69plcv4nzg27qashf328q0p6uc8cdpl4u3fz5sd2ugz34nk0u4ws2zrp0f&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;proposer_priority&quot;</span><span class="p">:</span> <span class="s2">&quot;-100&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;voting_power&quot;</span><span class="p">:</span> <span class="s2">&quot;100&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;bhvalcons1uqdrc98tjanxmdp4pa0uv3hdwny30jl0u4j7qp&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;pub_key&quot;</span><span class="p">:</span> <span class="s2">&quot;bhvalconspub1zcjduepqr56er5xnqdtzwckfv2z6ju423zv2m9plhgc34rvq34y5rjc3xfws6e7yw5&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;proposer_priority&quot;</span><span class="p">:</span> <span class="s2">&quot;-100&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;voting_power&quot;</span><span class="p">:</span> <span class="s2">&quot;100&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;bhvalcons1lwr0xr2kss70pjtkp3khcq50ec7xxsyag9dg3r&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;pub_key&quot;</span><span class="p">:</span> <span class="s2">&quot;bhvalconspub1zcjduepq9wqxkyh2s6vyna0qncvz5pr7fzj6nqqjs690w23vrvw93cf4dzxsthasln&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;proposer_priority&quot;</span><span class="p">:</span> <span class="s2">&quot;300&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;voting_power&quot;</span><span class="p">:</span> <span class="s2">&quot;100&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>查询指定高度的区块内容<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id5">
+<h4>示例<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bhcli</span> <span class="n">query</span>  <span class="n">block</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h4>成功返回<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;block_meta&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;block_id&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;hash&quot;</span><span class="p">:</span> <span class="s2">&quot;725AF85D2379A81D413B9A5CFA9A58F5524B13CCC07658043459B1693614761A&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;parts&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;total&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;hash&quot;</span><span class="p">:</span> <span class="s2">&quot;0DA561F01BFBDBF0A434DBEB61B3CECFE2C8237EAC8FB6F865AF6B21879D8FF0&quot;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;block&quot;</span><span class="p">:</span> <span class="s2">&quot;10&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;app&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;chain_id&quot;</span><span class="p">:</span> <span class="s2">&quot;bhchain-testnet&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;100&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-03-12T08:55:26.2535414Z&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;num_txs&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;total_txs&quot;</span><span class="p">:</span> <span class="s2">&quot;8&quot;</span><span class="p">,</span>
+      <span class="o">....</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="txs">
+<h3>txs<a class="headerlink" href="#txs" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id7">
+<h4>示例<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h4>成功返回<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="hash">
+<h3>根据hash查找交易<a class="headerlink" href="#hash" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id9">
+<h4>示例<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bhcli</span> <span class="n">query</span> <span class="n">tx</span> <span class="n">E81EC801B96C99E99BA2EAA73624AF5FAA7A0356894846BB11C70D57B62937AD</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id10">
+<h4>成功返回<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;130&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;txhash&quot;</span><span class="p">:</span> <span class="s2">&quot;E81EC801B96C99E99BA2EAA73624AF5FAA7A0356894846BB11C70D57B62937AD&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;{Category:4 Flows:[{Symbol:eth CUAddress:1A44C7E097ECA1EFB9EAE78853A0B8EDD70A069D OrderID:efc5b260-e389-48f6-ae8d-197d60ba6ce6 OrderType:4 OrderStatus:7} {CuAddress:BHNHpBtP97HX4QCyPRbeH4K7LupNVwe9ViM Multisignedadress:0x9F0Bc5D2DAFa22a8D1A496476D9abF4A7e3C2090 Symbol:eth Index:0 Txhash:0x5496614bbea29b2e91a90a285f809e9960e64f4ebe7c9ce2dd7c6b3384c0618d Amount:10000000000000000 OrderID:efc5b260-e389-48f6-ae8d-197d60ba6ce6 DepositType:10 Memo:memo}]}&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;raw_log&quot;</span><span class="p">:</span> <span class="s2">&quot;[{</span><span class="se">\&quot;</span><span class="s2">msg_index</span><span class="se">\&quot;</span><span class="s2">:0,</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2">:true,</span><span class="se">\&quot;</span><span class="s2">log</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">events</span><span class="se">\&quot;</span><span class="s2">:[{</span><span class="se">\&quot;</span><span class="s2">type</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">deposit</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">attributes</span><span class="se">\&quot;</span><span class="s2">:[{</span><span class="se">\&quot;</span><span class="s2">key</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">sender</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">value</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">BHj2wujKtAxw9XZMA7zDDvjGqKjoYUdw1FZ</span><span class="se">\&quot;</span><span class="s2">},{</span><span class="se">\&quot;</span><span class="s2">key</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">recipient</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">value</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">BHNHpBtP97HX4QCyPRbeH4K7LupNVwe9ViM</span><span class="se">\&quot;</span><span class="s2">},{</span><span class="se">\&quot;</span><span class="s2">key</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">symbol</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">value</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">eth</span><span class="se">\&quot;</span><span class="s2">},{</span><span class="se">\&quot;</span><span class="s2">key</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">hash</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">value</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">0x5496614bbea29b2e91a90a285f809e9960e64f4ebe7c9ce2dd7c6b3384c0618d</span><span class="se">\&quot;</span><span class="s2">},{</span><span class="se">\&quot;</span><span class="s2">key</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">amount</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">value</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">10000000000000000</span><span class="se">\&quot;</span><span class="s2">},{</span><span class="se">\&quot;</span><span class="s2">key</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">index</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">value</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">0</span><span class="se">\&quot;</span><span class="s2">},{</span><span class="se">\&quot;</span><span class="s2">key</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">memo</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">value</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">memo</span><span class="se">\&quot;</span><span class="s2">}]},{</span><span class="se">\&quot;</span><span class="s2">type</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">message</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">attributes</span><span class="se">\&quot;</span><span class="s2">:[{</span><span class="se">\&quot;</span><span class="s2">key</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">action</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">value</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">deposit</span><span class="se">\&quot;</span><span class="s2">}]}]}]&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;logs&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;msg_index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+<span class="o">....</span>        
+    <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="token">
+<h3>token<a class="headerlink" href="#token" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="order">
+<h3>order<a class="headerlink" href="#order" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id11">
+<h3>查询token发行数量<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id12">
+<h4>示例<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bhcli</span> <span class="n">query</span> <span class="n">supply</span> <span class="n">total</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id13">
+<h4>成功返回<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;denom&quot;</span><span class="p">:</span> <span class="s2">&quot;bht&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;2000000673785078713210129395&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mint">
+<h3>mint<a class="headerlink" href="#mint" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id14">
+<h4>示例<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bhcli</span> <span class="n">query</span> <span class="n">mint</span> <span class="n">params</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id15">
+<h4>成功返回<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;mint_denom&quot;</span><span class="p">:</span> <span class="s2">&quot;bht&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;blocks_per_year&quot;</span><span class="p">:</span> <span class="s2">&quot;10519200&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;inflation&quot;</span><span class="p">:</span> <span class="s2">&quot;0.030000000000000000&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;initial_price&quot;</span><span class="p">:</span> <span class="s2">&quot;0.100000000000000000&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;current_price&quot;</span><span class="p">:</span> <span class="s2">&quot;0.100000000000000000&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;node_cost_per_month&quot;</span><span class="p">:</span> <span class="s2">&quot;2600.000000000000000000&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="cu">
+<h3>cu<a class="headerlink" href="#cu" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="tx">
+<h2>tx<a class="headerlink" href="#tx" title="永久链接至标题">¶</a></h2>
+<div class="section" id="gov">
+<h3>gov<a class="headerlink" href="#gov" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="staking">
+<h3>staking<a class="headerlink" href="#staking" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="distribution">
+<h3>distribution<a class="headerlink" href="#distribution" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="transfer">
+<h3>transfer<a class="headerlink" href="#transfer" title="永久链接至标题">¶</a></h3>
+<div class="section" id="bhex">
+<h4>bhex系统内部转账<a class="headerlink" href="#bhex" title="永久链接至标题">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bhcli</span> <span class="n">tx</span> <span class="n">transfer</span> <span class="n">send</span> <span class="p">[</span><span class="n">from</span><span class="p">]</span> <span class="p">[</span><span class="n">to</span><span class="p">][</span><span class="n">amount</span><span class="p">][</span><span class="n">flags</span><span class="p">]</span> 
+</pre></div>
+</div>
+<div class="section" id="id16">
+<h5>参数说明<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h5>
+<p>名称 | 类型 | 参数说明
+—|—|—|
+from | string| 资产的所有者|
+to | string | 转入的托管单元地址|
+amount| string| 币种以及金额，多个资产是以逗号分隔。例如100bht，2btc|</p>
+</div>
+<div class="section" id="id17">
+<h5>示例<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h5>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bhcli</span> <span class="n">tx</span> <span class="n">transfer</span> <span class="n">send</span> <span class="n">alice</span>  <span class="n">BHZ3uWq8Znb1vLWLtT8EWGrTH424NQkhm7T</span>  <span class="mi">1000000000000000</span><span class="n">bht</span>  <span class="o">--</span><span class="n">chain</span><span class="o">-</span><span class="nb">id</span> <span class="n">bhchain</span><span class="o">-</span><span class="n">testnet</span>  <span class="o">--</span><span class="n">gas</span><span class="o">-</span><span class="n">prices</span> <span class="mf">1000000000000.0</span><span class="n">bht</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id18">
+<h4>成功返回<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;txhash&quot;</span><span class="p">:</span> <span class="s2">&quot;D6E4AD62656EAF9FE65C651CEFACF2C974D19B9E5C3348A00A9E3CD1A1BF2F91&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;raw_log&quot;</span><span class="p">:</span> <span class="s2">&quot;[{</span><span class="se">\&quot;</span><span class="s2">msg_index</span><span class="se">\&quot;</span><span class="s2">:0,</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2">:true,</span><span class="se">\&quot;</span><span class="s2">log</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">events</span><span class="se">\&quot;</span><span class="s2">:[{</span><span class="se">\&quot;</span><span class="s2">type</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">message</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">attributes</span><span class="se">\&quot;</span><span class="s2">:[{</span><span class="se">\&quot;</span><span class="s2">key</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">action</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">value</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">send</span><span class="se">\&quot;</span><span class="s2">}]}]}]&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;logs&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;msg_index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;log&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;events&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;message&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;action&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;send&quot;</span>
+            <span class="p">}</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+<span class="n">rogan</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id19">
+<h4>将外链资产充值到bhex<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bhcli</span> <span class="n">tx</span> <span class="n">transfer</span> <span class="n">deposit</span> <span class="p">[</span><span class="n">initiator</span><span class="p">]</span> <span class="p">[</span><span class="n">to_cu</span><span class="p">][</span><span class="n">to_address</span><span class="p">][</span><span class="n">amount</span><span class="p">][</span><span class="nb">hash</span><span class="p">][</span><span class="n">index</span><span class="p">][</span><span class="n">memo</span><span class="p">][</span><span class="n">height</span><span class="p">][</span><span class="n">flags</span><span class="p">]</span> 
+</pre></div>
+</div>
+<div class="section" id="id20">
+<h5>参数说明<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h5>
+<p>名称 | 类型 | 参数说明
+—|—|—|
+initiator | string| 充值的发起人，可以是toCU的所有者也可以是其他人|
+to_cu| string | 被充值的托管单元地址|
+to_address| string | 被充值的托管单元地址对应币种的外链(例如:btc eth)地址|
+amount| string| 币种以及金额|
+hash| string| 外链交易hash|
+index|uint64| 外链交易索引，对于utxo类型资产, index 等于Vout中的index值;对于账户类型资产，index = 0 |
+memo|string| 外链交易中附带的memo
+height|uint64| 外链交易发生的区块高度</p>
+</div>
+<div class="section" id="id21">
+<h5>示例<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h5>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bhcli tx transfer deposit alice $(bhcli keys show -a bob) 0x6537f7fb0064aaa4b5b9f379d24133027155b727 10000000000000000eth 0x228409bb2999911b94f0513f101f3fcf212058b7af18c88c625b41ddf20a0c6b 0 memo 7505327 --chain-id bhchain-testnet --gas-prices 1000000000000.0bht
+</pre></div>
+</div>
+</div>
+<div class="section" id="id22">
+<h5>成功返回<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h5>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> 
+<span class="n">height</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">txhash</span><span class="p">:</span> <span class="n">E81EC801B96C99E99BA2EAA73624AF5FAA7A0356894846BB11C70D57B62937AD</span>
+<span class="n">code</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">data</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+<span class="n">rawlog</span><span class="p">:</span> <span class="s1">&#39;[{&quot;msg_index&quot;:0,&quot;success&quot;:true,&quot;log&quot;:&quot;&quot;,&quot;events&quot;:[{&quot;type&quot;:&quot;message&quot;,&quot;attributes&quot;:[{&quot;key&quot;:&quot;action&quot;,&quot;value&quot;:&quot;deposit&quot;}]}]}]&#39;</span>
+<span class="n">logs</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">msgindex</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="n">success</span><span class="p">:</span> <span class="n">true</span>
+  <span class="n">log</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">events</span><span class="p">:</span>
+  <span class="o">-</span> <span class="nb">type</span><span class="p">:</span> <span class="n">message</span>
+    <span class="n">attributes</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">key</span><span class="p">:</span> <span class="n">action</span>
+      <span class="n">value</span><span class="p">:</span> <span class="n">deposit</span>
+<span class="n">info</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+<span class="n">gaswanted</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">gasused</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">codespace</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+<span class="n">tx</span><span class="p">:</span> <span class="n">null</span>
+<span class="n">timestamp</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+<span class="n">events</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id23">
+<h4>将资产提现到外链地址<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bhcli</span> <span class="n">tx</span> <span class="n">transfer</span> <span class="n">withdrawal</span> <span class="p">[</span><span class="n">from</span><span class="p">]</span> <span class="p">[</span><span class="n">to_address</span><span class="p">][</span><span class="n">amount</span><span class="p">][</span><span class="n">gas</span><span class="p">][</span><span class="n">flags</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="id24">
+<h5>参数说明<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h5>
+<p>名称 | 类型 | 参数说明
+—|—|—|
+from | string| 资产的所有者|
+to_address | string | 提现的目的地址|
+amount| string| 币种以及金额|
+gas|string|以外链主链币计价的gas，比如提eth需要支付eth，提erc20 资产也需支付eth |</p>
+</div>
+<div class="section" id="id25">
+<h5>示例<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h5>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bhcli</span> <span class="n">tx</span> <span class="n">transfer</span> <span class="n">withdrawal</span> <span class="o">--</span><span class="n">chain</span><span class="o">-</span><span class="nb">id</span> <span class="n">bhchain</span><span class="o">-</span><span class="n">testnet</span> <span class="n">alice</span>  <span class="mh">0xc96d141c9110a8E61eD62caaD8A7c858dB15B82c</span>  <span class="mi">1200000000000000</span><span class="n">eth</span>  <span class="mi">1000000000000000</span> <span class="o">--</span><span class="n">gas</span><span class="o">-</span><span class="n">prices</span> <span class="mf">1000000000000.0</span><span class="n">bht</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id26">
+<h5>成功返回<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h5>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;txhash&quot;</span><span class="p">:</span> <span class="s2">&quot;F240EB278D946EA9C1DD999A56E54D8ADD3BE16FA9A93F5CF9BD8DE4DAD179DA&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;raw_log&quot;</span><span class="p">:</span> <span class="s2">&quot;[{</span><span class="se">\&quot;</span><span class="s2">msg_index</span><span class="se">\&quot;</span><span class="s2">:0,</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2">:true,</span><span class="se">\&quot;</span><span class="s2">log</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">events</span><span class="se">\&quot;</span><span class="s2">:[{</span><span class="se">\&quot;</span><span class="s2">type</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">message</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">attributes</span><span class="se">\&quot;</span><span class="s2">:[{</span><span class="se">\&quot;</span><span class="s2">key</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">action</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">value</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">withdrawal</span><span class="se">\&quot;</span><span class="s2">}]}]}]&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;logs&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;msg_index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;log&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;events&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;message&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;action&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;withdrawal&quot;</span>
+            <span class="p">}</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="rest-server">
+<h2>rest-server<a class="headerlink" href="#rest-server" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="keys">
+<h2>keys<a class="headerlink" href="#keys" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="version">
+<h2>version<a class="headerlink" href="#version" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="help">
+<h2>help<a class="headerlink" href="#help" title="永久链接至标题">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="swagger.html" class="btn btn-neutral float-right" title="BHChain API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../moudle/moudle.html" class="btn btn-neutral float-left" title="主要模块概述" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Bluehelix
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

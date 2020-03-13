@@ -1,0 +1,680 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>快速启动 &mdash; Bluehelix Chain v0.1 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="主要模块概述" href="../moudle/moudle.html" />
+    <link rel="prev" title="Bluehelix Chain简介" href="../home.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">首页</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Bluehelix Chain简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../home.html#id1">创新优势</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../home.html#id2">技术原理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../home.html#id3">整体架构</a></li>
+</ul>
+<p class="caption"><span class="caption-text">用户指南</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">快速启动</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">启动币核链全节点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">与币核链进行交互</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">1. 创建和管理币核链托管单元</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">2. 创建以太坊的跨链托管地址</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">3. 充入跨链资产</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">4. 跨链资产转账</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">5. 提出跨链资产</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">模块说明</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moudle/moudle.html">主要模块概述</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../moudle/moudle.html#id2">托管单元模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../moudle/moudle.html#id3">转账模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../moudle/moudle.html#id4">密钥生成模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../moudle/moudle.html#id5">代币模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../moudle/moudle.html#id6">订单模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../moudle/moudle.html#id7">提案模块</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API参考</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references/command-line.html">命令行参考</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../references/command-line.html#status">status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../references/command-line.html#config">config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../references/command-line.html#query">query</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../references/command-line.html#validators">查询当前validators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/command-line.html#id2">示例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../references/command-line.html#id3">成功返回</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/command-line.html#id4">查询指定高度的区块内容</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/command-line.html#id5">示例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../references/command-line.html#id6">成功返回</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/command-line.html#txs">txs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/command-line.html#id7">示例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../references/command-line.html#id8">成功返回</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/command-line.html#hash">根据hash查找交易</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/command-line.html#id9">示例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../references/command-line.html#id10">成功返回</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/command-line.html#token">token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/command-line.html#order">order</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/command-line.html#id11">查询token发行数量</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/command-line.html#id12">示例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../references/command-line.html#id13">成功返回</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/command-line.html#mint">mint</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/command-line.html#id14">示例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../references/command-line.html#id15">成功返回</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/command-line.html#cu">cu</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../references/command-line.html#tx">tx</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../references/command-line.html#gov">gov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/command-line.html#staking">staking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/command-line.html#distribution">distribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/command-line.html#transfer">transfer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/command-line.html#bhex">bhex系统内部转账</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../references/command-line.html#id18">成功返回</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../references/command-line.html#id19">将外链资产充值到bhex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../references/command-line.html#id23">将资产提现到外链地址</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../references/command-line.html#rest-server">rest-server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../references/command-line.html#keys">keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../references/command-line.html#version">version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../references/command-line.html#help">help</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../references/swagger.html">BHChain API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../references/swagger.html#transactions">Transactions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-txs-hash">get__txs_{hash}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#post-txs">post__txs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#post-txs-encode">post__txs_encode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../references/swagger.html#tendermint-rpc">Tendermint RPC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-node-info">get__node_info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-syncing">get__syncing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-blocks-latest">get__blocks_latest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-blocks-height">get__blocks_{height}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-validatorsets-latest">get__validatorsets_latest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-validatorsets-height">get__validatorsets_{height}</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../references/swagger.html#cu">Cu</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-cu-cus-address">get__cu_cus_{address}</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../references/swagger.html#staking">Staking</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-staking-delegators-delegatoraddr-delegations">get__staking_delegators_{delegatorAddr}_delegations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#post-staking-delegators-delegatoraddr-delegations">post__staking_delegators_{delegatorAddr}_delegations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-staking-delegators-delegatoraddr-delegations-validatoraddr">get__staking_delegators_{delegatorAddr}<em>delegations</em>{validatorAddr}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-staking-delegators-delegatoraddr-unbonding-delegations">get__staking_delegators_{delegatorAddr}_unbonding_delegations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#post-staking-delegators-delegatoraddr-unbonding-delegations">post__staking_delegators_{delegatorAddr}_unbonding_delegations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-staking-delegators-delegatoraddr-unbonding-delegations-validatoraddr">get__staking_delegators_{delegatorAddr}<em>unbonding_delegations</em>{validatorAddr}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-staking-redelegations">get__staking_redelegations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#post-staking-delegators-delegatoraddr-redelegations">post__staking_delegators_{delegatorAddr}_redelegations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-staking-delegators-delegatoraddr-validators">get__staking_delegators_{delegatorAddr}_validators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-staking-delegators-delegatoraddr-validators-validatoraddr">get__staking_delegators_{delegatorAddr}<em>validators</em>{validatorAddr}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-staking-validators">get__staking_validators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-staking-validators-validatoraddr">get__staking_validators_{validatorAddr}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-staking-validators-validatoraddr-delegations">get__staking_validators_{validatorAddr}_delegations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-staking-validators-validatoraddr-unbonding-delegations">get__staking_validators_{validatorAddr}_unbonding_delegations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-staking-pool">get__staking_pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-staking-parameters">get__staking_parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../references/swagger.html#governance">Governance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#post-gov-proposals">post__gov_proposals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-gov-proposals">get__gov_proposals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#post-gov-proposals-param-change">post__gov_proposals_param_change</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-gov-proposals-proposalid">get__gov_proposals_{proposalId}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-gov-proposals-proposalid-proposer">get__gov_proposals_{proposalId}_proposer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-gov-proposals-proposalid-deposits">get__gov_proposals_{proposalId}_deposits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#post-gov-proposals-proposalid-deposits">post__gov_proposals_{proposalId}_deposits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-gov-proposals-proposalid-deposits-depositor">get__gov_proposals_{proposalId}<em>deposits</em>{depositor}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-gov-proposals-proposalid-votes">get__gov_proposals_{proposalId}_votes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#post-gov-proposals-proposalid-votes">post__gov_proposals_{proposalId}_votes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-gov-proposals-proposalid-votes-voter">get__gov_proposals_{proposalId}<em>votes</em>{voter}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-gov-proposals-proposalid-tally">get__gov_proposals_{proposalId}_tally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-gov-parameters-deposit">get__gov_parameters_deposit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-gov-parameters-tallying">get__gov_parameters_tallying</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-gov-parameters-voting">get__gov_parameters_voting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../references/swagger.html#distribution">Distribution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-distribution-delegators-delegatoraddr-rewards">get__distribution_delegators_{delegatorAddr}_rewards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#post-distribution-delegators-delegatoraddr-rewards">post__distribution_delegators_{delegatorAddr}_rewards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-distribution-delegators-delegatoraddr-rewards-validatoraddr">get__distribution_delegators_{delegatorAddr}<em>rewards</em>{validatorAddr}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#post-distribution-delegators-delegatoraddr-rewards-validatoraddr">post__distribution_delegators_{delegatorAddr}<em>rewards</em>{validatorAddr}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-distribution-delegators-delegatoraddr-withdraw-address">get__distribution_delegators_{delegatorAddr}_withdraw_address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#post-distribution-delegators-delegatoraddr-withdraw-address">post__distribution_delegators_{delegatorAddr}_withdraw_address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-distribution-validators-validatoraddr">get__distribution_validators_{validatorAddr}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-distribution-validators-validatoraddr-outstanding-rewards">get__distribution_validators_{validatorAddr}_outstanding_rewards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-distribution-validators-validatoraddr-rewards">get__distribution_validators_{validatorAddr}_rewards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#post-distribution-validators-validatoraddr-rewards">post__distribution_validators_{validatorAddr}_rewards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-distribution-community-pool">get__distribution_community_pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-distribution-parameters">get__distribution_parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../references/swagger.html#supply">Supply</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-supply-total">get__supply_total</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-supply-total-denomination">get__supply_total_{denomination}</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../references/swagger.html#slashing">Slashing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-slashing-signing-infos">get__slashing_signing_infos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#post-slashing-validators-validatoraddr-unjail">post__slashing_validators_{validatorAddr}_unjail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-slashing-parameters">get__slashing_parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../references/swagger.html#mint">Mint</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-minting-parameters">get__minting_parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-minting-inflation">get__minting_inflation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-minting-annual-provisions">get__minting_annual-provisions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../references/swagger.html#token">Token</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-token-info-denom">get__token_info_{denom}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-token-listalltokens">get__token_listalltokens</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../references/swagger.html#order">Order</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#get-order-info-orderid">get__order_info_{orderId}</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../references/swagger.html#datastructure">DataStructure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#checktxresult">CheckTxResult</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#properties">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#delivertxresult">DeliverTxResult</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id1">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#broadcasttxcommitresult">BroadcastTxCommitResult</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id2">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#kvpair">KVPair</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id3">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#msg">Msg</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id4">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#address">Address</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id5">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#validatoraddress">ValidatorAddress</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id6">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#coin">Coin</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id7">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#hash">Hash</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id8">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#txquery">TxQuery</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id9">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#stdtx">StdTx</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id10">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#blockid">BlockID</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id11">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#blockheader">BlockHeader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id12">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#block">Block</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id13">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#blockquery">BlockQuery</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id14">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#delegationdelegatorreward">DelegationDelegatorReward</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id15">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#delegatortotalrewards">DelegatorTotalRewards</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id16">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#basereq">BaseReq</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id17">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#tendermintvalidator">TendermintValidator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id18">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#textproposal">TextProposal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id19">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#proposer">Proposer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id20">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#deposit">Deposit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id21">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#tallyresult">TallyResult</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id22">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#cukeygen">CUKeyGen</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id23">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#cudeposit">CUDeposit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id24">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#cuwithdrawal">CUWithdrawal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id25">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#vote">Vote</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id26">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#validator">Validator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id27">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#delegation">Delegation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id28">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#unbondingdelegationpair">UnbondingDelegationPair</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id29">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#unbondingentries">UnbondingEntries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id30">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#unbondingdelegation">UnbondingDelegation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id31">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#redelegation">Redelegation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id32">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#redelegationentry">RedelegationEntry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id33">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#validatordistinfo">ValidatorDistInfo</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id34">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#publickey">PublicKey</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id35">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#signinginfo">SigningInfo</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id36">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#paramchange">ParamChange</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id37">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#id38">Supply</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id39">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#id40">Token</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id41">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#basictoken">BasicToken</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id42">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#id43">Order</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id44">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#orderkeygen">OrderKeyGen</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id45">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#ordercollect">OrderCollect</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id46">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#orderwithdrawal">OrderWithdrawal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id47">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../references/swagger.html#ordersystransfer">OrderSysTransfer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/swagger.html#id48">Properties</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">常见问题</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#bluehelix-chain">什么是Bluehelix Chain？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#bluhelix-chain">如何加入Bluhelix Chain测试网？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#id1">如果获取测试代币？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html#erc20">如何测试erc20代币的托管充值提现流程？</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Bluehelix Chain</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>快速启动</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/guide/quick-start.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>快速启动<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>由于测试网在快速迭代开发中，我们现在提供预编译好的可执行文件，位于以下的代码库中：</p>
+<p>TODO: 代码库链接</p>
+<p>测试网的跨链资产仅支持BTC测试网，以太坊Ropsten测试网，其中ERC20代币仅支持Ropsten测试网的合约地址（TODO: ERC20代币合约地址）。充入其他资产将无法找回，请谨慎操作。</p>
+<div class="section" id="id2">
+<h2>启动币核链全节点<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>TODO: 启动全节点说明</p>
+</div>
+<div class="section" id="id3">
+<h2>与币核链进行交互<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>当全节点与全网同步所有区块后，我们可以用命令行工具(bhcli)与币核链进行交互，可以运行以下指令查询所有的命令。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ bhcli <span class="nb">help</span>
+</pre></div>
+</div>
+<p>我们给出跨链资产充币，转账和提币的流程简介，以以太坊Ropsten测试网为例。</p>
+<div class="section" id="id4">
+<h3>1. 创建和管理币核链托管单元<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ bhcli keys add bhuser --home node/
+</pre></div>
+</div>
+<p>通过该命令我们在指定的node目录下创建了一个bhuser的托管单元（创建过程中需要输入你的密码对托管单元密钥进行加密存储），创建成功后展示如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;bhuser&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;BHYPnVEFuEqyqG3cBk7ocKU3AGjEyQE26dg&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;pubkey&quot;</span><span class="p">:</span> <span class="s2">&quot;bhpub1addwnpepq2ukkkcvre327tqfhetts5happwl2jnwnanhfefeue9p4jdhx99jz9c726e&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>2. 创建以太坊的跨链托管地址<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ bhcli tx keygen keygen  bhuser eth BHYPnVEFuEqyqG3cBk7ocKU3AGjEyQE26dg  --chain-id bhchain-testnet --home node/
+</pre></div>
+</div>
+<p>通过这个命令我们为bhuser创建eth跨链托管单元地址，命令发送执行后等待2-3个区块后（密钥的分布式生成需要一定的时间），我们通过下面的命令查询对应的托管单元信息，可以获取到eth的跨链托管地址：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bhcli query cuinfo BHYPnVEFuEqyqG3cBk7ocKU3AGjEyQE26dg --chain-id bhchain-testnet --home node/
+</pre></div>
+</div>
+<p>查询的结果展示为：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;bhchain/CustodianUnit&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;cu_type&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;BHYPnVEFuEqyqG3cBk7ocKU3AGjEyQE26dg&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;public_key&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;tendermint/PubKeySecp256k1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;AmvTia/5ovwaCg/nud5FTvXg0OJ727wfXWf3JIHwfbqr&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;sequence&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;coins&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="p">],</span>
+    <span class="s2">&quot;coins_hold&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;assets&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="p">{</span>
+        <span class="s2">&quot;denom&quot;</span><span class="p">:</span> <span class="s2">&quot;eth&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;0x97efBEAd089c9B57C4d5ed4a57d4ebBE3659d34B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;enbale_sendtx&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;asset_pubkey&quot;</span><span class="p">:</span> <span class="s2">&quot;A/dbw3DsU9HGTnglann9ZvlGl1gCPsC+8/2gWNrjhcQ3&quot;</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>从查询到的信息看，我们为托管单元在创建了一个eth的跨链托管地址(0x97efBEAd089c9B57C4d5ed4a57d4ebBE3659d34B)，并且这个地址的密钥由各个记账人节点分布式保存其中的分片，公钥在托管单元上可见（assert_pubkey)。</p>
+</div>
+<div class="section" id="id6">
+<h3>3. 充入跨链资产<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ bhcli tx transfer deposit bhuser BHYPnVEFuEqyqG3cBk7ocKU3AGjEyQE26dg 0x97efBEAd089c9B57C4d5ed4a57d4ebBE3659d34B 200000000000000000eth 0xe9b435405af39c4d3d7363840f5e6604ec7c0a1ed5af122d4422fe391254936c <span class="m">0</span> memo <span class="m">7458322</span>  --chain-id bhchain-testnet --home node/
+</pre></div>
+</div>
+<p>在以太坊Ropsten测试网上，我们对刚才生成的跨链托管地址进行一次充值操作，转入0.2eth，交易发送成功后，我们通过该命令把对应的充值信息提交到bluehelix链上，bluehelix链校验通过后，会将该资产记录入对应的托管单元上，现在你可以开始对该资产进行转账或提现等相关操作。</p>
+</div>
+<div class="section" id="id7">
+<h3>4. 跨链资产转账<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ bhcli tx send bhuser  BHccpSzNbAPue6QBTfN8259t12CfxC9NY2K  100000000000000000eth --chain-id bhchain-testnet --home node/
+</pre></div>
+</div>
+<p>通过该命令我们将当前的托管单元充值的0.2eth向另外一个托管地址转出了0.1eth，对方的账户会增加0.1eth的资产。</p>
+</div>
+<div class="section" id="id8">
+<h3>5. 提出跨链资产<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bhcli tx transfer withdrawal BHccpSzNbAPue6QBTfN8259t12CfxC9NY2K 0xC933C741416151dAcFE9428d39222f747e2b45EB 79000000000000000eth <span class="m">21000000000000000</span> --chain-id bhchain-testnet --home node/
+</pre></div>
+</div>
+<p>通过该命令，托管用户(BHccpSzNbAPue6QBTfN8259t12CfxC9NY2K)把自己通过交易获取到的0.1eth(去除支付的手续费后还有0.079eth)提现到自己的eth账户(0xC933C741416151dAcFE9428d39222f747e2b45EB 非托管地址）上，通过一定区块高度后，用户可以在自己的账户看到提现到账信息。</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../moudle/moudle.html" class="btn btn-neutral float-right" title="主要模块概述" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../home.html" class="btn btn-neutral float-left" title="Bluehelix Chain简介" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Bluehelix
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

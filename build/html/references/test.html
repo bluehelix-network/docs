@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>rpc test &mdash; Bluehelix Chain v0.1 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">首页</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Bluehelix Chain简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../home.html#id1">创新优势</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../home.html#id2">技术原理</a></li>
+</ul>
+<p class="caption"><span class="caption-text">用户指南</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guide/quick-start.html">快速启动</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guide/quick-start.html#id2">启动币核链全节点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/quick-start.html#id3">与币核链进行交互</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/quick-start.html#id4">1. 创建和管理币核链托管单元</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/quick-start.html#id5">2. 创建以太坊的跨链托管地址</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/quick-start.html#id6">3. 充入跨链资产</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/quick-start.html#id7">4. 跨链资产转账</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/quick-start.html#id8">5. 提出跨链资产</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API参考</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="command-line.html">命令行参考</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="command-line.html#status">status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-line.html#config">config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-line.html#query">query</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#tendermint-validator-set">tendermint-validator-set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#block">block</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#txs">txs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#tx">tx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#staking">staking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#token">token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#order">order</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#supply">supply</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#mint">mint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#gov">gov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#cu">cu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#distribution">distribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#slashing">slashing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="command-line.html#id2">tx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-line.html#rest-server">rest-server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-line.html#keys">keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-line.html#version">version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-line.html#help">help</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="swagger.html">BHChain API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#node-info">/node_info</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#get"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#syncing">/syncing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id1"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#blocks-latest">/blocks/latest</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id2"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#blocks-height">/blocks/{height}</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id3"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#validatorsets-latest">/validatorsets/latest</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id4"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#validatorsets-height">/validatorsets/{height}</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id5"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#txs-hash">/txs/{hash}</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id6"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#txs">/txs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#post"><em><strong>POST</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#txs-encode">/txs/encode</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id7"><em><strong>POST</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#cu-cus-address">/cu/cus/{address}</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id8"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#staking-delegators-delegatoraddr-delegations">/staking/delegators/{delegatorAddr}/delegations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id9"><em><strong>GET</strong></em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id10"><em><strong>POST</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#staking-delegators-delegatoraddr-delegations-validatoraddr">/staking/delegators/{delegatorAddr}/delegations/{validatorAddr}</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id11"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#staking-delegators-delegatoraddr-unbonding-delegations">/staking/delegators/{delegatorAddr}/unbonding_delegations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id12"><em><strong>GET</strong></em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id13"><em><strong>POST</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#staking-delegators-delegatoraddr-unbonding-delegations-validatoraddr">/staking/delegators/{delegatorAddr}/unbonding_delegations/{validatorAddr}</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id14"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#staking-redelegations">/staking/redelegations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id15"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#staking-delegators-delegatoraddr-redelegations">/staking/delegators/{delegatorAddr}/redelegations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id16"><em><strong>POST</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#staking-delegators-delegatoraddr-validators">/staking/delegators/{delegatorAddr}/validators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id17"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#staking-delegators-delegatoraddr-validators-validatoraddr">/staking/delegators/{delegatorAddr}/validators/{validatorAddr}</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id18"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#staking-validators">/staking/validators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id19"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#staking-validators-validatoraddr">/staking/validators/{validatorAddr}</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id20"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#staking-validators-validatoraddr-delegations">/staking/validators/{validatorAddr}/delegations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id21"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#staking-validators-validatoraddr-unbonding-delegations">/staking/validators/{validatorAddr}/unbonding_delegations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id22"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#staking-pool">/staking/pool</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id23"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#staking-parameters">/staking/parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id24"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#slashing-signing-infos">/slashing/signing_infos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id25"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#slashing-validators-validatoraddr-unjail">/slashing/validators/{validatorAddr}/unjail</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id26"><em><strong>POST</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#slashing-parameters">/slashing/parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id27"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#gov-proposals">/gov/proposals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id28"><em><strong>POST</strong></em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id29"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#gov-proposals-param-change">/gov/proposals/param_change</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id30"><em><strong>POST</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#gov-proposals-proposalid">/gov/proposals/{proposalId}</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id31"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#gov-proposals-proposalid-proposer">/gov/proposals/{proposalId}/proposer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id32"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#gov-proposals-proposalid-deposits">/gov/proposals/{proposalId}/deposits</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id33"><em><strong>GET</strong></em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id34"><em><strong>POST</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#gov-proposals-proposalid-deposits-depositor">/gov/proposals/{proposalId}/deposits/{depositor}</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id35"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#gov-proposals-proposalid-votes">/gov/proposals/{proposalId}/votes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id36"><em><strong>GET</strong></em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id37"><em><strong>POST</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#gov-proposals-proposalid-votes-voter">/gov/proposals/{proposalId}/votes/{voter}</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id38"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#gov-proposals-proposalid-tally">/gov/proposals/{proposalId}/tally</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id39"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#gov-parameters-deposit">/gov/parameters/deposit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id40"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#gov-parameters-tallying">/gov/parameters/tallying</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id41"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#gov-parameters-voting">/gov/parameters/voting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id42"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#distribution-delegators-delegatoraddr-rewards">/distribution/delegators/{delegatorAddr}/rewards</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id43"><em><strong>GET</strong></em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id44"><em><strong>POST</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#distribution-delegators-delegatoraddr-rewards-validatoraddr">/distribution/delegators/{delegatorAddr}/rewards/{validatorAddr}</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id45"><em><strong>GET</strong></em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id46"><em><strong>POST</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#distribution-delegators-delegatoraddr-withdraw-address">/distribution/delegators/{delegatorAddr}/withdraw_address</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id47"><em><strong>GET</strong></em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id48"><em><strong>POST</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#distribution-validators-validatoraddr">/distribution/validators/{validatorAddr}</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id49"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#distribution-validators-validatoraddr-outstanding-rewards">/distribution/validators/{validatorAddr}/outstanding_rewards</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id50"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#distribution-validators-validatoraddr-rewards">/distribution/validators/{validatorAddr}/rewards</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id51"><em><strong>GET</strong></em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id52"><em><strong>POST</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#distribution-community-pool">/distribution/community_pool</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id53"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#distribution-parameters">/distribution/parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id54"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#minting-parameters">/minting/parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id55"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#minting-inflation">/minting/inflation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id56"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#minting-annual-provisions">/minting/annual-provisions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id57"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#supply-total">/supply/total</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id58"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#supply-total-denomination">/supply/total/{denomination}</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id59"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#token-info-denom">/token/info/{denom}</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id60"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#token-listalltokens">/token/listalltokens</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id61"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swagger.html#order-info-orderid">/order/info/{orderId}</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="swagger.html#id62"><em><strong>GET</strong></em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">常见问题</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Bluehelix Chain</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>rpc test</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/references/test.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rpc-test">
+<h1>rpc test<a class="headerlink" href="#rpc-test" title="永久链接至标题">¶</a></h1>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Bluehelix
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

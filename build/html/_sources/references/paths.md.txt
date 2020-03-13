@@ -1,0 +1,2476 @@
+
+<a name="paths"></a>
+## Paths
+
+<a name="blocks-latest-get"></a>
+### Get the latest block
+```
+GET /blocks/latest
+```
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|The latest block|[BlockQuery](#blockquery)|
+|**500**|Server internal error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Tendermint RPC
+
+
+<a name="blocks-height-get"></a>
+### Get a block at a certain height
+```
+GET /blocks/{height}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**height**  <br>*required*|Block height|number|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|The block at a specific height|[BlockQuery](#blockquery)|
+|**400**|Invalid height|No Content|
+|**404**|Request block height doesn't|No Content|
+|**500**|Server internal error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Tendermint RPC
+
+
+<a name="cu-cus-address-get"></a>
+### Get the custodian unit information on blockchain
+```
+GET /cu/cus/{address}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**address**  <br>*required*|Account address|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|Account information on the blockchain|[Response 200](#cu-cus-address-get-response-200)|
+|**500**|Server internel error|No Content|
+
+<a name="cu-cus-address-get-response-200"></a>
+**Response 200**
+
+|Name|Schema|
+|---|---|
+|**type**  <br>*optional*|string|
+|**value**  <br>*optional*|[value](#cu-cus-address-get-value)|
+
+<a name="cu-cus-address-get-value"></a>
+**value**
+
+|Name|Schema|
+|---|---|
+|**account_number**  <br>*optional*|string|
+|**address**  <br>*optional*|string|
+|**coins**  <br>*optional*|< [Coin](#coin) > array|
+|**public_key**  <br>*optional*|[PublicKey](#publickey)|
+|**sequence**  <br>*optional*|string|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Cu
+
+
+<a name="distribution-community_pool-get"></a>
+### Community pool parameters
+```
+GET /distribution/community_pool
+```
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [Coin](#coin) > array|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Distribution
+
+
+<a name="distribution-delegators-delegatoraddr-rewards-post"></a>
+### Withdraw all the delegator's delegation rewards
+```
+POST /distribution/delegators/{delegatorAddr}/rewards
+```
+
+
+#### Description
+Withdraw all the delegator's delegation rewards
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**delegatorAddr**  <br>*required*|Bech32 AccAddress of Delegator|string|
+|**Body**|**Withdraw request body**  <br>*optional*||[Withdraw request body](#distribution-delegators-delegatoraddr-rewards-post-withdraw-request-body)|
+
+<a name="distribution-delegators-delegatoraddr-rewards-post-withdraw-request-body"></a>
+**Withdraw request body**
+
+|Name|Schema|
+|---|---|
+|**base_req**  <br>*optional*|[BaseReq](#basereq)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[BroadcastTxCommitResult](#broadcasttxcommitresult)|
+|**400**|Invalid delegator address|No Content|
+|**401**|Key password is wrong|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Distribution
+
+
+<a name="distribution-delegators-delegatoraddr-rewards-get"></a>
+### Get the total rewards balance from all delegations
+```
+GET /distribution/delegators/{delegatorAddr}/rewards
+```
+
+
+#### Description
+Get the sum of all the rewards earned by delegations by a single delegator
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**delegatorAddr**  <br>*required*|Bech32 AccAddress of Delegator|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[DelegatorTotalRewards](#delegatortotalrewards)|
+|**400**|Invalid delegator address|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Distribution
+
+
+<a name="distribution-delegators-delegatoraddr-rewards-validatoraddr-post"></a>
+### Withdraw a delegation reward
+```
+POST /distribution/delegators/{delegatorAddr}/rewards/{validatorAddr}
+```
+
+
+#### Description
+Withdraw a delegator's delegation reward from a single validator
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**delegatorAddr**  <br>*required*|Bech32 AccAddress of Delegator|string|
+|**Path**|**validatorAddr**  <br>*required*|Bech32 OperatorAddress of validator|string|
+|**Body**|**Withdraw request body**  <br>*optional*||[Withdraw request body](#distribution-delegators-delegatoraddr-rewards-validatoraddr-post-withdraw-request-body)|
+
+<a name="distribution-delegators-delegatoraddr-rewards-validatoraddr-post-withdraw-request-body"></a>
+**Withdraw request body**
+
+|Name|Schema|
+|---|---|
+|**base_req**  <br>*optional*|[BaseReq](#basereq)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[BroadcastTxCommitResult](#broadcasttxcommitresult)|
+|**400**|Invalid delegator address or delegation body|No Content|
+|**401**|Key password is wrong|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Distribution
+
+
+<a name="distribution-delegators-delegatoraddr-rewards-validatoraddr-get"></a>
+### Query a delegation reward
+```
+GET /distribution/delegators/{delegatorAddr}/rewards/{validatorAddr}
+```
+
+
+#### Description
+Query a single delegation reward by a delegator
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**delegatorAddr**  <br>*required*|Bech32 AccAddress of Delegator|string|
+|**Path**|**validatorAddr**  <br>*required*|Bech32 OperatorAddress of validator|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [Coin](#coin) > array|
+|**400**|Invalid delegator address|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Distribution
+
+
+<a name="distribution-delegators-delegatoraddr-withdraw_address-post"></a>
+### Replace the rewards withdrawal address
+```
+POST /distribution/delegators/{delegatorAddr}/withdraw_address
+```
+
+
+#### Description
+Replace the delegations' rewards withdrawal address for a new one.
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**delegatorAddr**  <br>*required*|Bech32 AccAddress of Delegator|string|
+|**Body**|**Withdraw request body**  <br>*optional*||[Withdraw request body](#distribution-delegators-delegatoraddr-withdraw_address-post-withdraw-request-body)|
+
+<a name="distribution-delegators-delegatoraddr-withdraw_address-post-withdraw-request-body"></a>
+**Withdraw request body**
+
+|Name|Schema|
+|---|---|
+|**base_req**  <br>*optional*|[BaseReq](#basereq)|
+|**withdraw_address**  <br>*optional*|[Address](#address)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[BroadcastTxCommitResult](#broadcasttxcommitresult)|
+|**400**|Invalid delegator or withdraw address|No Content|
+|**401**|Key password is wrong|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Distribution
+
+
+<a name="distribution-delegators-delegatoraddr-withdraw_address-get"></a>
+### Get the rewards withdrawal address
+```
+GET /distribution/delegators/{delegatorAddr}/withdraw_address
+```
+
+
+#### Description
+Get the delegations' rewards withdrawal address. This is the address in which the user will receive the reward funds
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**delegatorAddr**  <br>*required*|Bech32 AccAddress of Delegator|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[Address](#address)|
+|**400**|Invalid delegator address|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Distribution
+
+
+#### Example HTTP response
+
+##### Response 200
+```json
+"cosmos1depk54cuajgkzea6zpgkq36tnjwdzv4afc3d27"
+```
+
+
+<a name="distribution-parameters-get"></a>
+### Fee distribution parameters
+```
+GET /distribution/parameters
+```
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[Response 200](#distribution-parameters-get-response-200)|
+|**500**|Internal Server Error|No Content|
+
+<a name="distribution-parameters-get-response-200"></a>
+**Response 200**
+
+|Name|Schema|
+|---|---|
+|**base_proposer_reward**  <br>*optional*|string|
+|**bonus_proposer_reward**  <br>*optional*|string|
+|**community_tax**  <br>*optional*|string|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Distribution
+
+
+<a name="distribution-validators-validatoraddr-get"></a>
+### Validator distribution information
+```
+GET /distribution/validators/{validatorAddr}
+```
+
+
+#### Description
+Query the distribution information of a single validator
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**validatorAddr**  <br>*required*|Bech32 OperatorAddress of validator|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[ValidatorDistInfo](#validatordistinfo)|
+|**400**|Invalid validator address|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Distribution
+
+
+<a name="distribution-validators-validatoraddr-outstanding_rewards-get"></a>
+### Fee distribution outstanding rewards of a single validator
+```
+GET /distribution/validators/{validatorAddr}/outstanding_rewards
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**validatorAddr**  <br>*required*|Bech32 OperatorAddress of validator|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [Coin](#coin) > array|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Distribution
+
+
+<a name="distribution-validators-validatoraddr-rewards-post"></a>
+### Withdraw the validator's rewards
+```
+POST /distribution/validators/{validatorAddr}/rewards
+```
+
+
+#### Description
+Withdraw the validator's self-delegation and commissions rewards
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**validatorAddr**  <br>*required*|Bech32 OperatorAddress of validator|string|
+|**Body**|**Withdraw request body**  <br>*optional*||[Withdraw request body](#distribution-validators-validatoraddr-rewards-post-withdraw-request-body)|
+
+<a name="distribution-validators-validatoraddr-rewards-post-withdraw-request-body"></a>
+**Withdraw request body**
+
+|Name|Schema|
+|---|---|
+|**base_req**  <br>*optional*|[BaseReq](#basereq)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[BroadcastTxCommitResult](#broadcasttxcommitresult)|
+|**400**|Invalid validator address|No Content|
+|**401**|Key password is wrong|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Distribution
+
+
+<a name="distribution-validators-validatoraddr-rewards-get"></a>
+### Commission and self-delegation rewards of a single validator
+```
+GET /distribution/validators/{validatorAddr}/rewards
+```
+
+
+#### Description
+Query the commission and self-delegation rewards of validator.
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**validatorAddr**  <br>*required*|Bech32 OperatorAddress of validator|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [Coin](#coin) > array|
+|**400**|Invalid validator address|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Distribution
+
+
+<a name="gov-parameters-deposit-get"></a>
+### Query governance deposit parameters
+```
+GET /gov/parameters/deposit
+```
+
+
+#### Description
+Query governance deposit parameters. The max_deposit_period units are in nanoseconds.
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[Response 200](#gov-parameters-deposit-get-response-200)|
+|**400**|<other_path> is not a valid query request path|No Content|
+|**404**|Found no deposit parameters|No Content|
+|**500**|Internal Server Error|No Content|
+
+<a name="gov-parameters-deposit-get-response-200"></a>
+**Response 200**
+
+|Name|Description|Schema|
+|---|---|---|
+|**max_deposit_period**  <br>*optional*|**Example** : `"86400000000000"`|string|
+|**min_deposit**  <br>*optional*||< [Coin](#coin) > array|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Governance
+
+
+<a name="gov-parameters-tallying-get"></a>
+### Query governance tally parameters
+```
+GET /gov/parameters/tallying
+```
+
+
+#### Description
+Query governance tally parameters
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[Response 200](#gov-parameters-tallying-get-response-200)|
+|**400**|<other_path> is not a valid query request path|No Content|
+|**404**|Found no tally parameters|No Content|
+|**500**|Internal Server Error|No Content|
+
+<a name="gov-parameters-tallying-get-response-200"></a>
+**Response 200**
+
+|Name|Description|Schema|
+|---|---|---|
+|**governance_penalty**  <br>*optional*|**Example** : `"0.0100000000"`|string|
+|**threshold**  <br>*optional*|**Example** : `"0.5000000000"`|string|
+|**veto**  <br>*optional*|**Example** : `"0.3340000000"`|string|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Governance
+
+
+<a name="gov-parameters-voting-get"></a>
+### Query governance voting parameters
+```
+GET /gov/parameters/voting
+```
+
+
+#### Description
+Query governance voting parameters. The voting_period units are in nanoseconds.
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[Response 200](#gov-parameters-voting-get-response-200)|
+|**400**|<other_path> is not a valid query request path|No Content|
+|**404**|Found no voting parameters|No Content|
+|**500**|Internal Server Error|No Content|
+
+<a name="gov-parameters-voting-get-response-200"></a>
+**Response 200**
+
+|Name|Description|Schema|
+|---|---|---|
+|**voting_period**  <br>*optional*|**Example** : `"86400000000000"`|string|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Governance
+
+
+<a name="gov-proposals-post"></a>
+### Submit a proposal
+```
+POST /gov/proposals
+```
+
+
+#### Description
+Send transaction to submit a proposal
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Body**|**post_proposal_body**  <br>*required*|valid value of `"proposal_type"` can be `"text"`, `"parameter_change"`, `"software_upgrade"`|[post_proposal_body](#gov-proposals-post-post_proposal_body)|
+
+<a name="gov-proposals-post-post_proposal_body"></a>
+**post_proposal_body**
+
+|Name|Description|Schema|
+|---|---|---|
+|**base_req**  <br>*optional*||[BaseReq](#basereq)|
+|**description**  <br>*optional*||string|
+|**initial_deposit**  <br>*optional*||< [Coin](#coin) > array|
+|**proposal_type**  <br>*optional*|**Example** : `"text"`|string|
+|**proposer**  <br>*optional*||[Address](#address)|
+|**title**  <br>*optional*||string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|Tx was succesfully generated|[StdTx](#stdtx)|
+|**400**|Invalid proposal body|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Governance
+
+
+<a name="gov-proposals-get"></a>
+### Query proposals
+```
+GET /gov/proposals
+```
+
+
+#### Description
+Query proposals information with parameters
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Query**|**depositor**  <br>*optional*|depositor address|string|
+|**Query**|**status**  <br>*optional*|proposal status, valid values can be `"deposit_period"`, `"voting_period"`, `"passed"`, `"rejected"`|string|
+|**Query**|**voter**  <br>*optional*|voter address|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [TextProposal](#textproposal) > array|
+|**400**|Invalid query parameters|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Governance
+
+
+<a name="gov-proposals-param_change-post"></a>
+### Generate a parameter change proposal transaction
+```
+POST /gov/proposals/param_change
+```
+
+
+#### Description
+Generate a parameter change proposal transaction
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Body**|**post_proposal_body**  <br>*required*|The parameter change proposal body that contains all parameter changes|[post_proposal_body](#gov-proposals-param_change-post-post_proposal_body)|
+
+<a name="gov-proposals-param_change-post-post_proposal_body"></a>
+**post_proposal_body**
+
+|Name|Schema|
+|---|---|
+|**base_req**  <br>*optional*|[BaseReq](#basereq)|
+|**changes**  <br>*optional*|< [ParamChange](#paramchange) > array|
+|**deposit**  <br>*optional*|< [Coin](#coin) > array|
+|**description**  <br>*optional*|string|
+|**proposer**  <br>*optional*|[Address](#address)|
+|**title**  <br>*optional*|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|The transaction was succesfully generated|[StdTx](#stdtx)|
+|**400**|Invalid proposal body|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Governance
+
+
+<a name="gov-proposals-proposalid-get"></a>
+### Query a proposal
+```
+GET /gov/proposals/{proposalId}
+```
+
+
+#### Description
+Query a proposal by id
+
+
+#### Parameters
+
+|Type|Name|Schema|
+|---|---|---|
+|**Path**|**proposalId**  <br>*required*|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[TextProposal](#textproposal)|
+|**400**|Invalid proposal id|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Governance
+
+
+<a name="gov-proposals-proposalid-deposits-post"></a>
+### Deposit tokens to a proposal
+```
+POST /gov/proposals/{proposalId}/deposits
+```
+
+
+#### Description
+Send transaction to deposit tokens to a proposal
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**proposalId**  <br>*required*|proposal id|string|
+|**Body**|**post_deposit_body**  <br>*required*||[post_deposit_body](#gov-proposals-proposalid-deposits-post-post_deposit_body)|
+
+<a name="gov-proposals-proposalid-deposits-post-post_deposit_body"></a>
+**post_deposit_body**
+
+|Name|Schema|
+|---|---|
+|**amount**  <br>*optional*|< [Coin](#coin) > array|
+|**base_req**  <br>*optional*|[BaseReq](#basereq)|
+|**depositor**  <br>*optional*|[Address](#address)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[BroadcastTxCommitResult](#broadcasttxcommitresult)|
+|**400**|Invalid proposal id or deposit body|No Content|
+|**401**|Key password is wrong|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Governance
+
+
+<a name="gov-proposals-proposalid-deposits-get"></a>
+### Query deposits
+```
+GET /gov/proposals/{proposalId}/deposits
+```
+
+
+#### Description
+Query deposits by proposalId
+
+
+#### Parameters
+
+|Type|Name|Schema|
+|---|---|---|
+|**Path**|**proposalId**  <br>*required*|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [Deposit](#deposit) > array|
+|**400**|Invalid proposal id|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Governance
+
+
+<a name="gov-proposals-proposalid-deposits-depositor-get"></a>
+### Query deposit
+```
+GET /gov/proposals/{proposalId}/deposits/{depositor}
+```
+
+
+#### Description
+Query deposit by proposalId and depositor address
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**depositor**  <br>*required*|Bech32 depositor address|string|
+|**Path**|**proposalId**  <br>*required*|proposal id|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[Deposit](#deposit)|
+|**400**|Invalid proposal id or depositor address|No Content|
+|**404**|Found no deposit|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Governance
+
+
+<a name="gov-proposals-proposalid-proposer-get"></a>
+### Query proposer
+```
+GET /gov/proposals/{proposalId}/proposer
+```
+
+
+#### Description
+Query for the proposer for a proposal
+
+
+#### Parameters
+
+|Type|Name|Schema|
+|---|---|---|
+|**Path**|**proposalId**  <br>*required*|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[Proposer](#proposer)|
+|**400**|Invalid proposal ID|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Governance
+
+
+<a name="gov-proposals-proposalid-tally-get"></a>
+### Get a proposal's tally result at the current time
+```
+GET /gov/proposals/{proposalId}/tally
+```
+
+
+#### Description
+Gets a proposal's tally result at the current time. If the proposal is pending deposits (i.e status 'DepositPeriod') it returns an empty tally result.
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**proposalId**  <br>*required*|proposal id|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[TallyResult](#tallyresult)|
+|**400**|Invalid proposal id|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Governance
+
+
+<a name="gov-proposals-proposalid-votes-post"></a>
+### Vote a proposal
+```
+POST /gov/proposals/{proposalId}/votes
+```
+
+
+#### Description
+Send transaction to vote a proposal
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**proposalId**  <br>*required*|proposal id|string|
+|**Body**|**post_vote_body**  <br>*required*|valid value of `"option"` field can be `"yes"`, `"no"`, `"no_with_veto"` and `"abstain"`|[post_vote_body](#gov-proposals-proposalid-votes-post-post_vote_body)|
+
+<a name="gov-proposals-proposalid-votes-post-post_vote_body"></a>
+**post_vote_body**
+
+|Name|Description|Schema|
+|---|---|---|
+|**base_req**  <br>*optional*||[BaseReq](#basereq)|
+|**option**  <br>*optional*|**Example** : `"yes"`|string|
+|**voter**  <br>*optional*||[Address](#address)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[BroadcastTxCommitResult](#broadcasttxcommitresult)|
+|**400**|Invalid proposal id or vote body|No Content|
+|**401**|Key password is wrong|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Governance
+
+
+<a name="gov-proposals-proposalid-votes-get"></a>
+### Query voters
+```
+GET /gov/proposals/{proposalId}/votes
+```
+
+
+#### Description
+Query voters information by proposalId
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**proposalId**  <br>*required*|proposal id|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [Vote](#vote) > array|
+|**400**|Invalid proposal id|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Governance
+
+
+<a name="gov-proposals-proposalid-votes-voter-get"></a>
+### Query vote
+```
+GET /gov/proposals/{proposalId}/votes/{voter}
+```
+
+
+#### Description
+Query vote information by proposal Id and voter address
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**proposalId**  <br>*required*|proposal id|string|
+|**Path**|**voter**  <br>*required*|Bech32 voter address|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[Vote](#vote)|
+|**400**|Invalid proposal id or voter address|No Content|
+|**404**|Found no vote|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Governance
+
+
+<a name="minting-annual-provisions-get"></a>
+### Current minting annual provisions value
+```
+GET /minting/annual-provisions
+```
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|string|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Mint
+
+
+<a name="minting-inflation-get"></a>
+### Current minting inflation value
+```
+GET /minting/inflation
+```
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|string|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Mint
+
+
+<a name="minting-parameters-get"></a>
+### Minting module parameters
+```
+GET /minting/parameters
+```
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[Response 200](#minting-parameters-get-response-200)|
+|**500**|Internal Server Error|No Content|
+
+<a name="minting-parameters-get-response-200"></a>
+**Response 200**
+
+|Name|Schema|
+|---|---|
+|**blocks_per_year**  <br>*optional*|string|
+|**goal_bonded**  <br>*optional*|string|
+|**inflation_max**  <br>*optional*|string|
+|**inflation_min**  <br>*optional*|string|
+|**inflation_rate_change**  <br>*optional*|string|
+|**mint_denom**  <br>*optional*|string|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Mint
+
+
+<a name="node_info-get"></a>
+### The properties of the connected node
+```
+GET /node_info
+```
+
+
+#### Description
+Information about the connected node
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|Node status|[Response 200](#node_info-get-response-200)|
+|**500**|Failed to query node status|No Content|
+
+<a name="node_info-get-response-200"></a>
+**Response 200**
+
+|Name|Schema|
+|---|---|
+|**application_version**  <br>*optional*|[application_version](#node_info-get-application_version)|
+|**node_info**  <br>*optional*|[node_info](#node_info-get-node_info)|
+
+<a name="node_info-get-application_version"></a>
+**application_version**
+
+|Name|Schema|
+|---|---|
+|**build_tags**  <br>*optional*|string|
+|**client_name**  <br>*optional*|string|
+|**commit**  <br>*optional*|string|
+|**go**  <br>*optional*|string|
+|**name**  <br>*optional*|string|
+|**server_name**  <br>*optional*|string|
+|**version**  <br>*optional*|string|
+
+<a name="node_info-get-node_info"></a>
+**node_info**
+
+|Name|Description|Schema|
+|---|---|---|
+|**channels**  <br>*optional*||string|
+|**id**  <br>*optional*||string|
+|**listen_addr**  <br>*optional*|**Example** : `"192.168.56.1:26656"`|string|
+|**moniker**  <br>*optional*|**Example** : `"validator-name"`|string|
+|**network**  <br>*optional*|**Example** : `"gaia-2"`|string|
+|**other**  <br>*optional*|more information on versions|[other](#node_info-get-node_info-other)|
+|**protocol_version**  <br>*optional*||[protocol_version](#node_info-get-node_info-protocol_version)|
+|**version**  <br>*optional*|Tendermint version  <br>**Example** : `"0.15.0"`|string|
+
+<a name="node_info-get-node_info-other"></a>
+**other**
+
+|Name|Description|Schema|
+|---|---|---|
+|**rpc_address**  <br>*optional*|**Example** : `"tcp://0.0.0.0:26657"`|string|
+|**tx_index**  <br>*optional*|**Example** : `"true"`|string|
+
+<a name="node_info-get-node_info-protocol_version"></a>
+**protocol_version**
+
+|Name|Description|Schema|
+|---|---|---|
+|**app**  <br>*optional*|**Example** : `"0"`|string|
+|**block**  <br>*optional*|**Example** : `"10"`|string|
+|**p2p**  <br>*optional*|**Example** : `"7"`|string|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Tendermint RPC
+
+
+<a name="slashing-parameters-get"></a>
+### Get the current slashing parameters
+```
+GET /slashing/parameters
+```
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[Response 200](#slashing-parameters-get-response-200)|
+|**500**|Internal Server Error|No Content|
+
+<a name="slashing-parameters-get-response-200"></a>
+**Response 200**
+
+|Name|Schema|
+|---|---|
+|**double_sign_unbond_duration**  <br>*optional*|string|
+|**downtime_unbond_duration**  <br>*optional*|string|
+|**max_evidence_age**  <br>*optional*|string|
+|**min_signed_per_window**  <br>*optional*|string|
+|**signed_blocks_window**  <br>*optional*|string|
+|**slash_fraction_double_sign**  <br>*optional*|string|
+|**slash_fraction_downtime**  <br>*optional*|string|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Slashing
+
+
+<a name="slashing-signing_infos-get"></a>
+### Get sign info of given all validators
+```
+GET /slashing/signing_infos
+```
+
+
+#### Description
+Get sign info of all validators
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Query**|**limit**  <br>*required*|Maximum number of items per page|integer|
+|**Query**|**page**  <br>*required*|Page number|integer|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [SigningInfo](#signinginfo) > array|
+|**400**|Invalid validator public key for one of the validators|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Slashing
+
+
+<a name="slashing-validators-validatoraddr-unjail-post"></a>
+### Unjail a jailed validator
+```
+POST /slashing/validators/{validatorAddr}/unjail
+```
+
+
+#### Description
+Send transaction to unjail a jailed validator
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**validatorAddr**  <br>*required*|Bech32 validator address|string|
+|**Body**|**UnjailBody**  <br>*required*||[UnjailBody](#slashing-validators-validatoraddr-unjail-post-unjailbody)|
+
+<a name="slashing-validators-validatoraddr-unjail-post-unjailbody"></a>
+**UnjailBody**
+
+|Name|Schema|
+|---|---|
+|**base_req**  <br>*optional*|[StdTx](#stdtx)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|Tx was succesfully generated|[BroadcastTxCommitResult](#broadcasttxcommitresult)|
+|**400**|Invalid validator address or base_req|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Slashing
+
+
+<a name="staking-delegators-delegatoraddr-delegations-post"></a>
+### Submit delegation
+```
+POST /staking/delegators/{delegatorAddr}/delegations
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**delegatorAddr**  <br>*required*|Bech32 AccAddress of Delegator|string|
+|**Body**|**delegation**  <br>*optional*|The password of the account to remove from the KMS|[delegation](#staking-delegators-delegatoraddr-delegations-post-delegation)|
+
+<a name="staking-delegators-delegatoraddr-delegations-post-delegation"></a>
+**delegation**
+
+|Name|Schema|
+|---|---|
+|**base_req**  <br>*optional*|[BaseReq](#basereq)|
+|**delegation**  <br>*optional*|[Coin](#coin)|
+|**delegator_address**  <br>*optional*|[Address](#address)|
+|**validator_address**  <br>*optional*|[ValidatorAddress](#validatoraddress)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[BroadcastTxCommitResult](#broadcasttxcommitresult)|
+|**400**|Invalid delegator address or delegation request body|No Content|
+|**401**|Key password is wrong|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Staking
+
+
+<a name="staking-delegators-delegatoraddr-delegations-get"></a>
+### Get all delegations from a delegator
+```
+GET /staking/delegators/{delegatorAddr}/delegations
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**delegatorAddr**  <br>*required*|Bech32 AccAddress of Delegator|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [Delegation](#delegation) > array|
+|**400**|Invalid delegator address|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Staking
+
+
+<a name="staking-delegators-delegatoraddr-delegations-validatoraddr-get"></a>
+### Query the current delegation between a delegator and a validator
+```
+GET /staking/delegators/{delegatorAddr}/delegations/{validatorAddr}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**delegatorAddr**  <br>*required*|Bech32 AccAddress of Delegator|string|
+|**Path**|**validatorAddr**  <br>*required*|Bech32 OperatorAddress of validator|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[Delegation](#delegation)|
+|**400**|Invalid delegator address or validator address|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Staking
+
+
+<a name="staking-delegators-delegatoraddr-redelegations-post"></a>
+### Submit a redelegation
+```
+POST /staking/delegators/{delegatorAddr}/redelegations
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**delegatorAddr**  <br>*required*|Bech32 AccAddress of Delegator|string|
+|**Body**|**delegation**  <br>*optional*|The sender and tx information|[delegation](#staking-delegators-delegatoraddr-redelegations-post-delegation)|
+
+<a name="staking-delegators-delegatoraddr-redelegations-post-delegation"></a>
+**delegation**
+
+|Name|Description|Schema|
+|---|---|---|
+|**base_req**  <br>*optional*||[BaseReq](#basereq)|
+|**delegator_address**  <br>*optional*||[Address](#address)|
+|**shares**  <br>*optional*|**Example** : `"100"`|string|
+|**validator_dst_address**  <br>*optional*||[ValidatorAddress](#validatoraddress)|
+|**validator_src_addressess**  <br>*optional*||[ValidatorAddress](#validatoraddress)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|Tx was succesfully generated|[StdTx](#stdtx)|
+|**400**|Invalid delegator address or redelegation request body|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Staking
+
+
+<a name="staking-delegators-delegatoraddr-unbonding_delegations-post"></a>
+### Submit an unbonding delegation
+```
+POST /staking/delegators/{delegatorAddr}/unbonding_delegations
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**delegatorAddr**  <br>*required*|Bech32 AccAddress of Delegator|string|
+|**Body**|**delegation**  <br>*optional*|The password of the account to remove from the KMS|[delegation](#staking-delegators-delegatoraddr-unbonding_delegations-post-delegation)|
+
+<a name="staking-delegators-delegatoraddr-unbonding_delegations-post-delegation"></a>
+**delegation**
+
+|Name|Description|Schema|
+|---|---|---|
+|**base_req**  <br>*optional*||[BaseReq](#basereq)|
+|**delegator_address**  <br>*optional*||[Address](#address)|
+|**shares**  <br>*optional*|**Example** : `"100"`|string|
+|**validator_address**  <br>*optional*||[ValidatorAddress](#validatoraddress)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[BroadcastTxCommitResult](#broadcasttxcommitresult)|
+|**400**|Invalid delegator address or unbonding delegation request body|No Content|
+|**401**|Key password is wrong|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Staking
+
+
+<a name="staking-delegators-delegatoraddr-unbonding_delegations-get"></a>
+### Get all unbonding delegations from a delegator
+```
+GET /staking/delegators/{delegatorAddr}/unbonding_delegations
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**delegatorAddr**  <br>*required*|Bech32 AccAddress of Delegator|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [UnbondingDelegation](#unbondingdelegation) > array|
+|**400**|Invalid delegator address|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Staking
+
+
+<a name="staking-delegators-delegatoraddr-unbonding_delegations-validatoraddr-get"></a>
+### Query all unbonding delegations between a delegator and a validator
+```
+GET /staking/delegators/{delegatorAddr}/unbonding_delegations/{validatorAddr}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**delegatorAddr**  <br>*required*|Bech32 AccAddress of Delegator|string|
+|**Path**|**validatorAddr**  <br>*required*|Bech32 OperatorAddress of validator|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[UnbondingDelegationPair](#unbondingdelegationpair)|
+|**400**|Invalid delegator address or validator address|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Staking
+
+
+<a name="staking-delegators-delegatoraddr-validators-get"></a>
+### Query all validators that a delegator is bonded to
+```
+GET /staking/delegators/{delegatorAddr}/validators
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**delegatorAddr**  <br>*required*|Bech32 AccAddress of Delegator|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [Validator](#validator) > array|
+|**400**|Invalid delegator address|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Staking
+
+
+<a name="staking-delegators-delegatoraddr-validators-validatoraddr-get"></a>
+### Query a validator that a delegator is bonded to
+```
+GET /staking/delegators/{delegatorAddr}/validators/{validatorAddr}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**delegatorAddr**  <br>*required*|Bech32 AccAddress of Delegator|string|
+|**Path**|**validatorAddr**  <br>*required*|Bech32 ValAddress of Delegator|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[Validator](#validator)|
+|**400**|Invalid delegator address or validator address|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Staking
+
+
+<a name="staking-parameters-get"></a>
+### Get the current staking parameter values
+```
+GET /staking/parameters
+```
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[Response 200](#staking-parameters-get-response-200)|
+|**500**|Internal Server Error|No Content|
+
+<a name="staking-parameters-get-response-200"></a>
+**Response 200**
+
+|Name|Schema|
+|---|---|
+|**bond_denom**  <br>*optional*|string|
+|**goal_bonded**  <br>*optional*|string|
+|**inflation_max**  <br>*optional*|string|
+|**inflation_min**  <br>*optional*|string|
+|**inflation_rate_change**  <br>*optional*|string|
+|**max_validators**  <br>*optional*|integer|
+|**unbonding_time**  <br>*optional*|string|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Staking
+
+
+<a name="staking-pool-get"></a>
+### Get the current state of the staking pool
+```
+GET /staking/pool
+```
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[Response 200](#staking-pool-get-response-200)|
+|**500**|Internal Server Error|No Content|
+
+<a name="staking-pool-get-response-200"></a>
+**Response 200**
+
+|Name|Schema|
+|---|---|
+|**bonded_tokens**  <br>*optional*|string|
+|**date_last_commission_reset**  <br>*optional*|string|
+|**inflation**  <br>*optional*|string|
+|**inflation_last_time**  <br>*optional*|string|
+|**loose_tokens**  <br>*optional*|string|
+|**prev_bonded_shares**  <br>*optional*|string|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Staking
+
+
+<a name="staking-redelegations-get"></a>
+### Get all redelegations (filter by query params)
+```
+GET /staking/redelegations
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Query**|**delegator**  <br>*optional*|Bech32 AccAddress of Delegator|string|
+|**Query**|**validator_from**  <br>*optional*|Bech32 ValAddress of SrcValidator|string|
+|**Query**|**validator_to**  <br>*optional*|Bech32 ValAddress of DstValidator|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [Redelegation](#redelegation) > array|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Staking
+
+
+<a name="staking-validators-get"></a>
+### Get all validator candidates. By default it returns only the bonded validators.
+```
+GET /staking/validators
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Query**|**limit**  <br>*optional*|The maximum number of items per page.|integer|
+|**Query**|**page**  <br>*optional*|The page number.|integer|
+|**Query**|**status**  <br>*optional*|The validator bond status. Must be either 'bonded', 'unbonded', or 'unbonding'.|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [Validator](#validator) > array|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Staking
+
+
+<a name="staking-validators-validatoraddr-get"></a>
+### Query the information from a single validator
+```
+GET /staking/validators/{validatorAddr}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**validatorAddr**  <br>*required*|Bech32 OperatorAddress of validator|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[Validator](#validator)|
+|**400**|Invalid validator address|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Staking
+
+
+<a name="staking-validators-validatoraddr-delegations-get"></a>
+### Get all delegations from a validator
+```
+GET /staking/validators/{validatorAddr}/delegations
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**validatorAddr**  <br>*required*|Bech32 OperatorAddress of validator|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [Delegation](#delegation) > array|
+|**400**|Invalid validator address|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Staking
+
+
+<a name="staking-validators-validatoraddr-unbonding_delegations-get"></a>
+### Get all unbonding delegations from a validator
+```
+GET /staking/validators/{validatorAddr}/unbonding_delegations
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**validatorAddr**  <br>*required*|Bech32 OperatorAddress of validator|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|< [UnbondingDelegation](#unbondingdelegation) > array|
+|**400**|Invalid validator address|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Staking
+
+
+<a name="supply-total-get"></a>
+### Total supply of coins in the chain
+```
+GET /supply/total
+```
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|[Supply](#supply)|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Supply
+
+
+<a name="supply-total-denomination-get"></a>
+### Total supply of a single coin denomination
+```
+GET /supply/total/{denomination}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**denomination**  <br>*required*|Coin denomination|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|OK|string|
+|**400**|Invalid coin denomination|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Supply
+
+
+<a name="syncing-get"></a>
+### Syncing state of node
+```
+GET /syncing
+```
+
+
+#### Description
+Get if the node is currently syning with other nodes
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|Node syncing status|[Response 200](#syncing-get-response-200)|
+|**500**|Server internal error|No Content|
+
+<a name="syncing-get-response-200"></a>
+**Response 200**
+
+|Name|Schema|
+|---|---|
+|**syncing**  <br>*optional*|boolean|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Tendermint RPC
+
+
+<a name="txs-post"></a>
+### Broadcast a signed tx
+```
+POST /txs
+```
+
+
+#### Description
+Broadcast a signed tx to a full node
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Body**|**txBroadcast**  <br>*required*|The tx must be a signed StdTx. The supported broadcast modes include `"block"`(return after tx commit), `"sync"`(return afer CheckTx) and `"async"`(return right away).|[txBroadcast](#txs-post-txbroadcast)|
+
+<a name="txs-post-txbroadcast"></a>
+**txBroadcast**
+
+|Name|Description|Schema|
+|---|---|---|
+|**mode**  <br>*optional*|**Example** : `"block"`|string|
+|**tx**  <br>*optional*||[StdTx](#stdtx)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|Tx broadcasting result|[BroadcastTxCommitResult](#broadcasttxcommitresult)|
+|**500**|Internal Server Error|No Content|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Transactions
+
+
+<a name="txs-get"></a>
+### Search transactions
+```
+GET /txs
+```
+
+
+#### Description
+Search transactions by events.
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Query**|**limit**  <br>*optional*|Maximum number of items per page|integer|
+|**Query**|**message.action**  <br>*optional*|transaction events such as 'message.action=send' which results in the following endpoint: 'GET /txs?message.action=send'|string|
+|**Query**|**message.sender**  <br>*optional*|transaction tags with sender: 'GET /txs?message.action=send&message.sender=cosmos16xyempempp92x9hyzz9wrgf94r6j9h5f06pxxv'|string|
+|**Query**|**page**  <br>*optional*|Page number|integer|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|All txs matching the provided events|[PaginatedQueryTxs](#paginatedquerytxs)|
+|**400**|Invalid search events|No Content|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Transactions
+
+
+<a name="txs-encode-post"></a>
+### Encode a transaction to the Amino wire format
+```
+POST /txs/encode
+```
+
+
+#### Description
+Encode a transaction (signed or not) from JSON to base64-encoded Amino serialized bytes
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Body**|**tx**  <br>*required*|The tx to encode|[tx](#txs-encode-post-tx)|
+
+<a name="txs-encode-post-tx"></a>
+**tx**
+
+|Name|Schema|
+|---|---|
+|**tx**  <br>*optional*|[StdTx](#stdtx)|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|The tx was successfully decoded and re-encoded|[Response 200](#txs-encode-post-response-200)|
+|**400**|The tx was malformated|No Content|
+|**500**|Server internal error|No Content|
+
+<a name="txs-encode-post-response-200"></a>
+**Response 200**
+
+|Name|Description|Schema|
+|---|---|---|
+|**tx**  <br>*optional*|**Example** : `"The base64-encoded Amino-serialized bytes for the tx"`|string|
+
+
+#### Consumes
+
+* `application/json`
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Transactions
+
+
+<a name="txs-hash-get"></a>
+### Get a Tx by hash
+```
+GET /txs/{hash}
+```
+
+
+#### Description
+Retrieve a transaction using its hash.
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**hash**  <br>*required*|Tx hash|string|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|Tx with the provided hash|[TxQuery](#txquery)|
+|**500**|Internal Server Error|No Content|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Transactions
+
+
+<a name="validatorsets-latest-get"></a>
+### Get the latest validator set
+```
+GET /validatorsets/latest
+```
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|The validator set at the latest block height|[Response 200](#validatorsets-latest-get-response-200)|
+|**500**|Server internal error|No Content|
+
+<a name="validatorsets-latest-get-response-200"></a>
+**Response 200**
+
+|Name|Schema|
+|---|---|
+|**block_height**  <br>*optional*|string|
+|**validators**  <br>*optional*|< [TendermintValidator](#tendermintvalidator) > array|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Tendermint RPC
+
+
+<a name="validatorsets-height-get"></a>
+### Get a validator set a certain height
+```
+GET /validatorsets/{height}
+```
+
+
+#### Parameters
+
+|Type|Name|Description|Schema|
+|---|---|---|---|
+|**Path**|**height**  <br>*required*|Block height|number|
+
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**200**|The validator set at a specific block height|[Response 200](#validatorsets-height-get-response-200)|
+|**400**|Invalid height|No Content|
+|**404**|Block at height not available|No Content|
+|**500**|Server internal error|No Content|
+
+<a name="validatorsets-height-get-response-200"></a>
+**Response 200**
+
+|Name|Schema|
+|---|---|
+|**block_height**  <br>*optional*|string|
+|**validators**  <br>*optional*|< [TendermintValidator](#tendermintvalidator) > array|
+
+
+#### Produces
+
+* `application/json`
+
+
+#### Tags
+
+* Tendermint RPC
+
+
+
