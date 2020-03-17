@@ -1,12 +1,84 @@
 # 命令行参考
 
 ## status
+查询链的状态
 
-## client config
+##### 示例
+```
+bhcli  status
+```
+##### 成功返回
+```
+{
+  "node_info": {
+    "protocol_version": {
+      "p2p": "7",
+      "block": "10",
+      "app": "0"
+    },
+    "id": "b2db55fc78167a25ad85164ffa337156d2e9cc50",
+    "listen_addr": "tcp://0.0.0.0:26656",
+    "network": "bhchain-testnet",
+    "version": "0.32.7",
+    "channels": "402021222330380070",
+    "moniker": "node0",
+    "other": {
+      "tx_index": "on",
+      "rpc_address": "tcp://0.0.0.0:26657"
+    }
+  },
+  "sync_info": {
+    "latest_block_hash": "3B7AB98BB8EB8C159730553F7C8B96D20C35263A852D76CC0D76D52AC2EFCB19",
+    "latest_app_hash": "48A621D1158D6B09FEA1C64BEDFEFF00577F313D71F4DBD7E65EF7B41CBB61D0",
+    "latest_block_height": "9082",
+    "latest_block_time": "2020-03-13T13:58:49.6930023Z",
+    "catching_up": false
+  },
+  "validator_info": {
+    "address": "FB86F30D56843CF0C9760C6D7C028FCE3C63409D",
+    "pub_key": {
+      "type": "tendermint/PubKeyEd25519",
+      "value": "K4BrEuqGmEn14J4YKgR+SKWpgBKGivcqLBscWOE1aI0="
+    },
+    "voting_power": "100"
+  }
+}
+
+```
+## config
+### 显示client 的配置
+
+##### 示例
+```
+bhcli config
+```
+##### 成功返回
+```
+chain-id = "bhchain-testnet"
+indent = true
+output = "json"
+trust-node = true
+```
+
+### 配置client
+将bhclient 的常用的配置信息存放在.bhcli/config/config.toml中
+```
+bhcli config <key> [value] [flags]
+```
+
+##### 示例
+```
+bhcli config indent  false
+bhcli config chain-id  bhchain-testnet
+bhcli config output  text
+bhcli config trust-node  true
+```
 
 ## query
 
-### 查询当前validators
+### tendermint-validator-set
+
+查询当前validators
 ```
 bhcli query tendermint-validator-set
 ```
@@ -50,7 +122,8 @@ bhcli query tendermint-validator-set
 ```
 
 
-### 查询指定高度的区块内容
+### block
+查询指定高度的区块内容
 #### 示例
 ```
 bhcli query  block 100
@@ -92,11 +165,18 @@ bhcli query  block 100
 
 ```
 
-### 根据hash查找交易
+### tx
+
+根据hash查找交易 
+
+```
+bhcli query tx [hash]
+```
+
 
 #### 示例
 ```
-bhcli query tx E81EC801B96C99E99BA2EAA73624AF5FAA7A0356894846BB11C70D57B62937AD
+bhcli query tx E81EC801B96C99E99BA2EAA73624AF5FAA7A0356894846BB11C70D57B62937AD --trust-node
 ```
 
 #### 成功返回
@@ -115,8 +195,73 @@ bhcli query tx E81EC801B96C99E99BA2EAA73624AF5FAA7A0356894846BB11C70D57B62937AD
 ```
 
 ### token
+查询支持的币种信息
+```bash
+bhcli query token token tusdt 
+```
+返回值
+```
+{                                                           
+  "symbol": "tusdt",                                        
+  "token_info": {                                           
+    "symbol": "tusdt",                                      
+    "issuer": "0xC9476A4919a7E5c7e1760b68F945971769D5c1D8", 
+    "chain": "eth",                                         
+    "type": "2",                                            
+    "is_send_enabled": true,                                
+    "is_deposit_enabled": true,                             
+    "is_withdrawal_enabled": true,                          
+    "decimals": "6",                                        
+    "total_supply": "30000000000000000",                    
+    "collect_threshold": "200000000",                       
+    "deposit_threshold": "200000000",                       
+    "open_fee": "28000000000000000000",                     
+    "sys_open_fee": "28000000000000000000",                 
+    "withdrawal_fee": "8000000000000000",                   
+    "max_op_cu_number": "10",                               
+    "systransfer_amount": "800000000000000",                
+    "op_cu_systransfer_amount": "100000000000000000",       
+    "gas_limit": "80000",                                   
+    "gas_price": "1000"                                     
+    }  
+}                                                       
+```
 
 ### order
+有些发送到链上的交易会产生order，比如keygen(创建资产地址)、deposit（充币）,withdrawal(提币)等交易。可以根据交易返回的orderid，查询order详情。
+```bash
+bhcli query order order 3b16978a-a435-4b64-acc3-7e15b571319b 
+```
+返回值
+```
+{
+  "type": "bhchain/order/OrderKeyGen",
+  "value": {
+    "OrderBase": {
+      "cu_address": "BHYTXFNFVrb8WPh5in7Lfz2JVgDyEWQ252V",
+      "id": "3b16978a-a435-4b64-acc3-7e15b571319b",
+      "order_type": "1",
+      "symbol": "btc",
+      "status": "10"
+    },
+    "key_nodes": [
+      "BHMbeYCvT6wE3LM2fBcr6hhNExNLAyffzVP",
+      "BHYTXFNFVrb8WPh5in7Lfz2JVgDyEWQ252V",
+      "BHYVhhstYXg5Ke5zSGNMG6j6r6YiErmMWK3",
+      "BHiJbAipJgJMdHKCZ2NFJoDCnZ8HaKUT34v"
+    ],
+    "sign_threshold": "3",
+    "to": "BHaTpyRAQvg9fo2KDRzf4EwtjrVW3ZanJPs",
+    "open_fee": [
+      {
+        "denom": "bht",
+        "amount": "28000000000000000000"
+      }
+    ],
+    "multi_sign_address": "mwW98DAVfoojM7fkn1RW871PdjBZh7qF6L"
+  }
+}
+```
 
 ### Supply
 
@@ -195,17 +340,18 @@ bhcli query gov params
 }
 ```
 
-
-
 #### 查询一个提案
 根据proposal id精确的查询某个提案的内容
 ```
 bhcli query gov proposal [proposal-id] [flags]
 ```
 ##### 参数说明
-名称 | 类型 | 参数说明
----|---|---|
-proposal-id | string | proposal id|
+
+| 名称   | 类型   | 参数说明|
+| ------ | ------ | ------ |
+|proposal-id | string | proposal id|
+
+
 ##### 示例
 ```
 bhcli query gov proposal 1
@@ -246,11 +392,14 @@ bhcli query gov proposal 1
 bhcli query gov proposals  [flags]
 ```
 ##### 常用查询选项
-名称 | 类型 | 参数说明
----|---|---|
---depositor | string| 查询depositor抵押了资产的提案 |
---voter | string | voter 投过票的提案|
---status| string|提案目前的状态|
+
+| 名称  | 类型 | 参数说明 |
+| ------ | ------ | ------ |
+| --depositor| string | 查询depositor抵押了资产的提案 |
+| --voter | string | voter 投过票的提案|
+| --status | string | 提案目前的状态|
+
+
 
 ##### 示例
 ```
@@ -265,10 +414,11 @@ bhcli query gov deposit [proposal-id] [depositer-addr] [flags]
 ```
 
 ##### 参数说明
-名称 | 类型 | 参数说明
----|---|---|
-proposal-id | string| proposal id |
-depositer-addr | string | depositer地址|
+
+| 名称 | 类型 | 参数说明 |
+| ------ | ------ | ------ |
+| proposal-id | string | proposal id |
+| depositer-addr | string | depositer地址|
 
 ##### 示例
 ```
@@ -295,9 +445,10 @@ bhcli query gov deposits [proposal-id][flags]
 ```
 
 ##### 参数说明
-名称 | 类型 | 参数说明
----|---|---|
-proposal-id | string| proposal id |
+
+| 名称 | 类型 |参数说明 |
+| ------ | ------ | ------ |
+| proposal-id | string | proposal id |
 
 
 ##### 示例
@@ -325,10 +476,11 @@ bhcli query gov deposits 1
 bhcli query gov vote [proposal-id] [voter-addr] [flags]
 ```
 ##### 参数说明
-名称 | 类型 | 参数说明
----|---|---|
-proposal-id | string| proposal id |
-voter-addr | string | voter地址|
+
+| 名称 | 类型 |参数说明 |
+| ------ | ------ | ------ |
+| proposal-id | string | proposal id |
+| depositer-addr | string | depositer地址 |
 
 ##### 示例
 ```
@@ -348,9 +500,12 @@ bhcli query gov vote 1 $(bhcli keys show -a alice)
 bhcli query gov votes [proposal-id] [flags]
 ```
 ##### 参数说明
-名称 | 类型 | 参数说明
----|---|---|
-proposal-id | string| proposal id |
+
+| 名称 | 类型 |参数说明 |
+| ------ | ------ | ------ |
+| proposal-id | string | proposal id |
+
+
 
 
 ##### 示例
@@ -381,9 +536,11 @@ bhcli query gov proposer [proposal-id] [flags]
 ```
 
 ##### 参数说明
-名称 | 类型 | 参数说明
----|---|---|
-proposal-id | string| proposal id |
+
+| 名称 | 类型 | 参数说明 |
+| ------ | ------ | ------ | 
+| proposal-id | string | proposal id |
+
 
 
 ##### 示例
@@ -406,9 +563,10 @@ bhcli query gov tally [proposal-id] [flags]
 ```
 
 ##### 参数说明
-名称 | 类型 | 参数说明
----|---|---|
-proposal-id | string| proposal id |
+
+| 名称 | 类型 | 参数说明 |
+| ------ | ------ | ------ | 
+| proposal-id | string | proposal id |
 
 ##### 示例
 ```
@@ -425,15 +583,634 @@ bhcli query gov tally 1
 }
 ```
 
+### staking 
+
+#### 查询staking模块的参数
+```
+bhcli query staking params
+```
+
+##### 示例
+```
+bhcli query staking params
+```
+
+##### 成功返回
+```
+{
+  "unbonding_time": "1814400000000000",
+  "max_validators": 100,
+  "max_entries": 7,
+  "bond_denom": "bht",
+  "MinSelfDelegation": "5000000000000000000000000"
+}
+```
+
+#### 查询所有的validators
+```
+bhcli query staking validators
+```
+##### 示例
+```
+bhcli query staking validators
+```
+##### 成功返回
+```
+[
+  {
+    "operator_address": "bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj",
+    "consensus_pubkey": "bhvalconspub1zcjduepq9wqxkyh2s6vyna0qncvz5pr7fzj6nqqjs690w23vrvw93cf4dzxsthasln",
+    "jailed": false,
+    "status": 2,
+    "tokens": "100000100000000000000000000",
+    "delegator_shares": "100000100000000000000000000.000000000000000000",
+    "description": {
+      "moniker": "node0",
+      "identity": "",
+      "website": "",
+      "details": ""
+    },
+    "unbonding_height": "0",
+    "unbonding_time": "1970-01-01T00:00:00Z",
+    "commission": {
+      "commission_rates": {
+        "rate": "0.000000000000000000",
+        "max_rate": "0.000000000000000000",
+        "max_change_rate": "0.000000000000000000"
+      },
+      "update_time": "2020-03-11T11:00:58.678367Z"
+    },
+    "min_self_delegation": "5000000000000000000000000"
+  }
+  ... ...
+]
+```
+
+
+#### 查询某一个validator
+```
+bhcli query staking validator [validator-addr] [flags]
+```
+
+##### 参数说明
+
+| 名称 | 类型  | 参数说明 | 
+| ------ | ------ | ------ |
+| validator-addr | string | 以bhbhvaloper开头的validator地址 |
+
+##### 示例
+```
+bhcli query staking validator bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj
+```
+
+##### 成功返回
+```
+{
+  "operator_address": "bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj",
+  "consensus_pubkey": "bhvalconspub1zcjduepq9wqxkyh2s6vyna0qncvz5pr7fzj6nqqjs690w23vrvw93cf4dzxsthasln",
+  "jailed": false,
+  "status": 2,
+  "tokens": "100000100000000000000000000",
+  "delegator_shares": "100000100000000000000000000.000000000000000000",
+  "description": {
+    "moniker": "node0",
+    "identity": "",
+    "website": "",
+    "details": ""
+  },
+  "unbonding_height": "0",
+  "unbonding_time": "1970-01-01T00:00:00Z",
+  "commission": {
+    "commission_rates": {
+      "rate": "0.000000000000000000",
+      "max_rate": "0.000000000000000000",
+      "max_change_rate": "0.000000000000000000"
+    },
+    "update_time": "2020-03-11T11:00:58.678367Z"
+  },
+  "min_self_delegation": "5000000000000000000000000"
+}
+```
+
+#### 查询某delegtor给某validator的抵押
+```
+bhcli query staking delegation [delegator-addr] [validator-addr] [flags]
+```
+##### 参数说明
+
+| 名称 | 类型  | 参数说明 | 
+| ------ | ------ | ------ |
+| delegator-addr | string | 以BH开头的delegator地址 |
+| validator-addr | string | 以bhbhvaloper开头的validator地址 |
+
+
+##### 示例
+```
+bhcli query staking delegation BHhhzxqNNjw3qx4ZjaR9mnJeLRC1FxPWEyp bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj
+```
+##### 成功返回
+```
+{
+  "delegator_address": "BHhhzxqNNjw3qx4ZjaR9mnJeLRC1FxPWEyp",
+  "validator_address": "bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj",
+  "shares": "120000000000000000000.000000000000000000",
+  "balance": "120000000000000000000"
+}
+```
+
+#### 查询某delegtor所有的抵押
+```
+bhcli query staking delegations [delegator-addr] [flags]
+```
+
+##### 参数说明
+
+| 名称 | 类型  | 参数说明 | 
+| ------ | ------ | ------ |
+| delegator-addr | string | 以BH开头的delegator地址 |
+
+
+
+##### 示例
+```
+bhcli query staking delegations BHhhzxqNNjw3qx4ZjaR9mnJeLRC1FxPWEyp
+```
+
+##### 成功返回
+```
+[
+  {
+    "delegator_address": "BHhhzxqNNjw3qx4ZjaR9mnJeLRC1FxPWEyp",
+    "validator_address": "bhvaloper136g7jus2k0x7xv7wfusf5npzl5c3uf2cgrwf7z",
+    "shares": "50000000000000000000.000000000000000000",
+    "balance": "50000000000000000000"
+  },
+  {
+    "delegator_address": "BHhhzxqNNjw3qx4ZjaR9mnJeLRC1FxPWEyp",
+    "validator_address": "bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj",
+    "shares": "120000000000000000000.000000000000000000",
+    "balance": "120000000000000000000"
+  }
+]
+```
+
+#### 查询某delegtor给某validator的正在解冻的抵押
+```
+bhcli query staking unbonding-delegation [delegator-addr] [validator-addr] [flags]
+```
+
+##### 参数说明
+
+| 名称 | 类型  | 参数说明 | 
+| ------ | ------ | ------ |
+| delegator-addr | string | 以BH开头的delegator地址 |
+| validator-addr | string | 以bhbhvaloper开头的validator地址 |
+
+##### 示例
+```
+bhcli query staking unbonding-delegation BHhhzxqNNjw3qx4ZjaR9mnJeLRC1FxPWEyp bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj
+```
+
+##### 成功返回
+```
+{
+  "delegator_address": "BHhhzxqNNjw3qx4ZjaR9mnJeLRC1FxPWEyp",
+  "validator_address": "bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj",
+  "entries": [
+    {
+      "creation_height": "5931",
+      "completion_time": "2020-04-03T08:23:33.8255297Z",
+      "initial_balance": "30000000000000000000",
+      "balance": "30000000000000000000"
+    }
+  ]
+}
+```
+
+
+#### 查询某delegtor所有的正在解冻的抵押
+```
+bhcli query staking unbonding-delegations [delegator-addr] [flags]
+```
+##### 参数说明
+
+| 名称 | 类型 | 参数说明 |
+| ------ | ------ | ------ |
+| delegator-addr | string | 以BH开头的delegator地址 |
+
+
+
+##### 示例
+```
+bhcli query staking unbonding-delegations BHhhzxqNNjw3qx4ZjaR9mnJeLRC1FxPWEyp
+```
+##### 成功返回
+```
+[
+  {
+    "delegator_address": "BHhhzxqNNjw3qx4ZjaR9mnJeLRC1FxPWEyp",
+    "validator_address": "bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj",
+    "entries": [
+      {
+        "creation_height": "5931",
+        "completion_time": "2020-04-03T08:23:33.8255297Z",
+        "initial_balance": "30000000000000000000",
+        "balance": "30000000000000000000"
+      }
+    ]
+  }
+]
+```
+
+#### 查询某delegtor redeleagte的抵押
+```
+bhcli query staking redelegation [delegator-addr] [src-validator-addr] [dst-validator-addr] [flags]
+```
+##### 参数说明
+
+| 名称 | 类型  | 参数说明 | 
+| ------ | ------ | ------ |
+| delegator-addr | string | 以BH开头的delegator地址 |
+| src-validator-add | string | 以bhbhvaloper开头的源validator地址 |
+| dst-validator-addr | string | 以bhbhvaloper开头的目的validator地址 |
+
+##### 示例
+```
+query staking redelegation BHhhzxqNNjw3qx4ZjaR9mnJeLRC1FxPWEyp bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj bhvaloper1ksn6eszxp4v2sfrf96s5ded4zz9cr9u46uy0hz
+```
+
+##### 成功返回
+```
+[
+  {
+    "delegator_address": "BHhhzxqNNjw3qx4ZjaR9mnJeLRC1FxPWEyp",
+    "validator_src_address": "bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj",
+    "validator_dst_address": "bhvaloper136g7jus2k0x7xv7wfusf5npzl5c3uf2cgrwf7z",
+    "entries": [
+      {
+        "creation_height": 5891,
+        "completion_time": "2020-04-03T08:19:58.6984724Z",
+        "initial_balance": "50000000000000000000",
+        "shares_dst": "50000000000000000000.000000000000000000",
+        "balance": "50000000000000000000"
+      }
+    ]
+  }
+]
+```
+
+#### 查询某delegtor所有redelegate抵押
+```
+bhcli query staking redelegations 
+```
+
+##### 示例
+```
+bhcli query staking redelegations BHhhzxqNNjw3qx4ZjaR9mnJeLRC1FxPWEyp
+```
+
+##### 成功返回
+```
+[
+  {
+    "delegator_address": "BHhhzxqNNjw3qx4ZjaR9mnJeLRC1FxPWEyp",
+    "validator_src_address": "bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj",
+    "validator_dst_address": "bhvaloper136g7jus2k0x7xv7wfusf5npzl5c3uf2cgrwf7z",
+    "entries": [
+      {
+        "creation_height": 5891,
+        "completion_time": "2020-04-03T08:19:58.6984724Z",
+        "initial_balance": "50000000000000000000",
+        "shares_dst": "50000000000000000000.000000000000000000",
+        "balance": "50000000000000000000"
+      }
+    ]
+  }
+]
+```
+
+#### 查询validator收到的所有抵押
+```
+  bhcli query staking delegations-to [validator-addr] [flags]
+```
+
+##### 参数说明
+
+| 名称 | 类型  | 参数说明 | 
+| ------ | ------ | ------ |
+| validator-addr | string | 以bhbhvaloper开头的validator地址 |
+
+
+##### 示例
+```
+ bhcli query staking delegations-to bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj
+```
+
+##### 成功返回
+```
+[
+  {
+    "delegator_address": "BHhhzxqNNjw3qx4ZjaR9mnJeLRC1FxPWEyp",
+    "validator_address": "bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj",
+    "shares": "120000000000000000000.000000000000000000",
+    "balance": "120000000000000000000"
+  },
+  {
+    "delegator_address": "BHj2wujKtAxw9XZMA7zDDvjGqKjoYUdw1FZ",
+    "validator_address": "bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj",
+    "shares": "100000000000000000000000000.000000000000000000",
+    "balance": "100000000000000000000000000"
+  }
+]
+```
+
+#### 查询所有从某validator redelegate给其他validator 的抵押
+```
+bhcli query staking redelegations-from [validator-addr] [flags]
+```
+##### 参数说明
+
+| 名称 | 类型 |参数说明 |
+| ------ | ------ | ------ |
+| validator-addr | string | 以bhbhvaloper开头的validator地址 |
+
+##### 示例
+```
+bhcli query staking redelegations-from bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj
+```
+
+##### 成功返回
+```
+[
+  {
+    "delegator_address": "BHhhzxqNNjw3qx4ZjaR9mnJeLRC1FxPWEyp",
+    "validator_src_address": "bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj",
+    "validator_dst_address": "bhvaloper136g7jus2k0x7xv7wfusf5npzl5c3uf2cgrwf7z",
+    "entries": [
+      {
+        "creation_height": 5891,
+        "completion_time": "2020-04-03T08:19:58.6984724Z",
+        "initial_balance": "50000000000000000000",
+        "shares_dst": "50000000000000000000.000000000000000000",
+        "balance": "50000000000000000000"
+      }
+    ]
+  }
+]
+```
+
+
+#### 查询validator正在解冻的抵押
+```
+bhcli query staking unbonding-delegations-from [validator-addr] [flags]
+```
+##### 参数说明
+
+| 名称 | 类型 |参数说明 |
+| ------ | ------ | ------ |
+| validator-addr | string | 以bhbhvaloper开头的validator地址 |
+
+##### 示例
+```
+bhcli query staking unbonding-delegations-from bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj
+```
+
+##### 成功返回
+```
+[
+  {
+    "delegator_address": "BHhhzxqNNjw3qx4ZjaR9mnJeLRC1FxPWEyp",
+    "validator_address": "bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj",
+    "entries": [
+      {
+        "creation_height": "5931",
+        "completion_time": "2020-04-03T08:23:33.8255297Z",
+        "initial_balance": "30000000000000000000",
+        "balance": "30000000000000000000"
+      }
+    ]
+  }
+]
+```
+
+
+#### 查询staking pool中的金额
+```
+$bhcli query staking pool
+```
+##### 示例
+```
+$bhcli query staking pool
+```
+
+##### 成功返回
+```
+{
+  "not_bonded_tokens": "30000000000000000000",
+  "bonded_tokens": "400000170000000000000000000"
+}
+```
+
+
+### distribution 
+
+#### 查询distribution的参数
+```
+bhcli query distribution params
+```
+##### 示例
+```
+bhcli query distribution params
+```
+##### 成功返回
+```
+{
+  "community_tax": "0.020000000000000000",
+  "base_proposer_reward": "0.010000000000000000",
+  "bonus_proposer_reward": "0.040000000000000000",
+  "withdraw_addr_enabled": true
+}
+```
+
+#### 查询validator-outstanding-rewards
+```
+bhcli query distribution validator-outstanding-rewards [validator] [flags]
+```
+##### 参数说明
+
+| 名称 | 类型 | 参数说明 |
+| ------ | ------ | ------ |
+| validator | string | 以bhbhvaloper开头的validator地址 |
+
+
+
+##### 示例
+```
+bhcli query distribution validator-outstanding-rewards bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj
+```
+##### 成功返回
+```
+[
+  {
+    "denom": "bht",
+    "amount": "2660287954396406984212.455000000000000000"
+  }
+]
+```
+
+#### 查询validator的commisssion
+```
+ bhcli query distribution commission [validator] [flags]
+```
+##### 参数说明
+
+| 名称 | 类型 | 参数说明 |
+| ------ | ------ | ------ |
+| validator | string | 以bhbhvaloper开头的validator地址 |
+
+##### 示例
+```
+bhcli query distribution commission bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj
+```
+##### 成功返回
+```
+null
+```
+注：因为目前几个validator 的commission都设置为0
+
+#### 查询validator的slashes
+```
+bhcli query distribution slashes [validator] [start-height] [end-height] [flags]
+```
+##### 参数说明
+
+| 名称 | 类型 | 参数说明 |
+| ------ | ------ | ------ |
+| validator | string | 以bhbhvaloper开头的validator地址 |
+| start-height | string | start hegiht |
+| end-height | string | end hegiht |
+
+##### 示例
+```
+bhcli query distribution slashes bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj 0 100
+```
+
+##### 成功返回
+```
+null
+```
+
+
+#### 查询validator的rewards
+```
+bhcli query distribution rewards [delegator-addr] [<validator-addr>] [flags]
+```
+##### 参数说明
+
+| 名称 | 类型 | 参数说明 |
+| ------ | ------ | ------ |
+| delegator-addr | string | 以BH开头的delegator地址 |
+| validator-addr | string | 以bhbhvaloper开头的validator地址,可选 |
+
+
+##### 示例
+```
+bhcli query distribution rewards BHhhzxqNNjw3qx4ZjaR9mnJeLRC1FxPWEyp bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj
+```
+##### 成功返回
+```
+[
+  {
+    "denom": "bht",
+    "amount": "962401463225280.000000000000000000"
+  }
+]
+```
+
+#### 查询community-pool
+```
+bhcli query distribution community-pool
+```
+##### 示例
+```
+bhcli query distribution community-pool
+```
+##### 成功返回
+```
+[
+  {
+    "denom": "bht",
+    "amount": "219939930488250056843.400000000000000000"
+  }
+]
+```
+
+
+### slashing 
+
+#### 查询slashing的参数
+```
+bhcli query slashing params
+```
+##### 示例
+```
+bhcli query slashing params
+```
+##### 成功返回
+
+```
+{
+  "max_evidence_age": "120000000000",
+  "signed_blocks_window": "100",
+  "min_signed_per_window": "0.500000000000000000",
+  "downtime_jail_duration": "600000000000",
+  "slash_fraction_double_sign": "0.050000000000000000",
+  "slash_fraction_downtime": "0.010000000000000000"
+}
+```
+
+#### 查询一个validator 的签名信息
+
+```
+bhcli query slashing signing-info [validator-conspub] [flags]
+```
+
+##### 参数说明
+
+| 名称 | 类型 | 参数说明 |
+| ------ | ------ | ------ |
+| validator-conspub | string | 以bhvalconspub开头的validator 公钥 |
+
+##### 示例
+
+```
+bhcli query slashing signing-info bhvalconspub1zcjduepq69plcv4nzg27qashf328q0p6uc8cdpl4u3fz5sd2ugz34nk0u4ws2zrp0f
+```
+##### 成功返回
+
+```
+{
+  "address": "bhvalcons1h0muy2683gyp6ra2qph9hxwdfmxzw6x4xtkm8m",
+  "start_height": "0",
+  "index_offset": "8606",
+  "jailed_until": "1970-01-01T00:00:00Z",
+  "tombstoned": false,
+  "missed_blocks_counter": "0"
+}
+```
+
+
+
 ### cu
 #### 查询某个cu的信息
 ```
 bhcli query cu cuinfo [cu_addr][flags] 
 ```
 ##### 参数说明
-名称 | 类型 | 参数说明
----|---|---|
-cu_addr | string| 被查询的cu地址 |
+
+| 名称 | 类型  | 参数说明 | 
+| ------ | ------ | ------ |
+| cu-addr | string | 以BH开头的托管托单元地址 |
 
 ##### 示例
 ```
@@ -493,8 +1270,142 @@ bhcli query cu cuinfo $(bhcli keys show -a alice)
 
 
 ## tx
-### gov
+### keygen
+#### 创建运营托管单元（OPCU）
+```bash
+bhcli tx keygen newopcu [from_key_or_address] [symbol] [Op_CU_address]
+```
+##### 参数说明
 
+| 名称 | 类型  | 参数说明 | 
+| ------ | ------ | ------ |
+| --from_key_or_address | string | newopcu交易发起者地址 |
+| --symbol | string | 币种 |
+| --to | string | OPCU地址 |
+
+##### 示例
+创建一个eth运营托管单元，地址为BHiLmdKcdt7k98BizNi4mhRgrkrtZYmXWj9, 该地址必须是未被使用的地址
+```
+bhcli tx keygen newopcu BHj2wujKtAxw9XZMA7zDDvjGqKjoYUdw1FZ eth BHiLmdKcdt7k98BizNi4mhRgrkrtZYmXWj9 --chain-id bhchain-testnet --gas-prices 1000000000000.0bht --home ../testnetdocker/node0/bhcli
+```
+##### 成功返回
+```
+{
+  "chain_id": "bhchain-testnet",
+  "cu_number": "0",
+  "sequence": "664",
+  "fee": {
+    "amount": [
+      {
+        "denom": "bht",
+        "amount": "200000000000000000"
+      }
+    ],
+    "gas": "200000"
+  },
+  "msgs": [
+    {
+      "type": "bhchain/keygen/MsgNewOpCU",
+      "value": {
+        "Symbol": "eth",
+        "From": "BHj2wujKtAxw9XZMA7zDDvjGqKjoYUdw1FZ",
+        "OpCUAddress": "BHiLmdKcdt7k98BizNi4mhRgrkrtZYmXWj9"
+      }
+    }
+  ],
+  "memo": ""
+}
+
+confirm transaction before signing and broadcasting [y/N]: y
+Password to sign with 'node0':<输入密码>
+height: 0
+txhash: B8FEF2E621686136882ADA19C939D959982D979C13BB51D3ACA29C4C964AC777
+code: 0
+data: ""
+rawlog: '[{"msg_index":0,"success":true,"log":"","events":[{"type":"message","attributes":[{"key":"action","value":"new_op_cu"}]}]}]'
+logs:
+- msgindex: 0
+  success: true
+  log: ""
+  events:
+  - type: message
+    attributes:
+    - key: action
+      value: new_op_cu
+info: ""
+gaswanted: 0
+gasused: 0
+codespace: ""
+tx: null
+timestamp: ""
+events: []
+```
+
+#### 为托管单元（CU）生成币种地址
+```bash
+keygen [from_key_or_address] [symbol] [to]
+```
+##### 参数说明
+
+| 名称 | 类型  | 参数说明 | 
+| ------ | ------ | ------ |
+| --from_key_or_address | string | keygen交易发起者地址 |
+| --symbol | string | 币种 |
+| --to | string | 创建币种地址的所有者 |
+
+##### 示例
+为BHiLmdKcdt7k98BizNi4mhRgrkrtZYmXWj9 生成eth地址 
+```
+bhcli tx keygen keygen BHj2wujKtAxw9XZMA7zDDvjGqKjoYUdw1FZ eth BHiLmdKcdt7k98BizNi4mhRgrkrtZYmXWj9 --chain-id bhchain-testnet --gas-prices 1000000000000.0bht --home ../testnetdocker/node0/bhcli
+```
+##### 成功返回
+```
+{
+  "chain_id": "bhchain-testnet",
+  "cu_number": "0",
+  "sequence": "603",
+  "fee": {
+    "amount": [
+      {
+        "denom": "bht",
+        "amount": "200000000000000000"
+      }
+    ],
+    "gas": "200000"
+  },
+  "msgs": [
+    {
+      "type": "bhchain/keygen/MsgKeyGen",
+      "value": {
+        "OrderId": "8aa29c69-2cd4-4dde-bb5c-273757bfdd6e",
+        "Symbol": "eth",
+        "From": "BHj2wujKtAxw9XZMA7zDDvjGqKjoYUdw1FZ",
+        "To": "BHiLmdKcdt7k98BizNi4mhRgrkrtZYmXWj9"
+      }
+    }
+  ],
+  "memo": ""
+}
+
+confirm transaction before signing and broadcasting [y/N]: y
+Password to sign with 'node0':<输入密码>
+height: 0
+txhash: 4ABC263EFFAC364ED966EE4654ADEC050D6A1C2886B229CE13556010111531E9
+code: 4
+data: ""
+rawlog: '{"codespace":"bhchain_base","code":4,"message":"signature verification failed;
+  verify correct CU sequence and chain-id"}'
+logs: []
+info: ""
+gaswanted: 0
+gasused: 0
+codespace: ""
+tx: null
+timestamp: ""
+events: []
+```
+
+### gov
 #### 发起一个提案
 ```
 bhcli tx gov submit-proposal --title="Test Proposal Title" --description="Test Proposal Contents" --type="Text" --deposit="10bht" --from mykey --gas-prices 1000000000000.0bht
@@ -506,12 +1417,12 @@ bhcli tx gov submit-proposal --proposal="path/to/proposal.json" --from mykey --g
 
 ##### 参数说明
 
-名称 | 类型 | 参数说明
----|---|---|
---title | string| 提案的标题|
---description | string | 提案的描述内容|
---type| string| 发起提案的类型（这里指定为Text）|
---from|string|提案发起者|
+| 名称 | 类型  | 参数说明 | 
+| ------ | ------ | ------ |
+| --title | string | 提案的标题 |
+| --description | string | 提案的内容 |
+| --type | string | 发起提案的类型（这里指定为Text |
+| --from | string | 提案发起者 |
 
 ##### 示例
 ```
@@ -551,10 +1462,11 @@ bhcli tx gov deposit [proposal-id] [amount]
 
 ##### 参数说明
 
-名称 | 类型 | 参数说明
----|---|---|
-proposal-id | string| proposal id|
-amount | string | 抵押的资金|
+| 名称 | 类型 |参数说明 |
+| ------ | ------ | ------ |
+| proposal-id | string | proposal id |
+| amount | string | 抵押的资金 |
+
 
 ##### 示例
 ```
@@ -593,10 +1505,11 @@ bhcli tx gov vote [proposal-id] [option] [flags]
 ```
 ##### 参数说明
 
-名称 | 类型 | 参数说明
----|---|---|
-proposal-id | string| proposal id|
-options | string | 投票选项yes/no/abstain/nowithveto|
+| 名称 | 类型  | 参数说明 | 
+| ------ | ------ | ------ |
+| proposal-id | string | proposal id |
+| options | string | 投票选项yes/no/abstain/nowithveto |
+
 
 
 ##### 示例
@@ -630,10 +1543,240 @@ bhcli tx gov vote 1 yes --from alice --gas-prices 1000000000000.0bht
 }
 ```
 
-### staking 
+### staking
+#### 将资产抵押给validator
+ ```
+ bhcli tx staking delegate [validator-addr] [amount] [flags]
+ ```
+##### 参数说明
+
+| 名称 | 类型  | 参数说明 | 
+| ------ | ------ | ------ |
+| validator-addr | string | 以bhvaloper开头的validator地址 |
+| amount | string | 币种以及金额 |
+
+##### 示例
+
+```
+bhcli tx staking delegate bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj  100000000000000000000bht --from alice --gas-prices 1000000000000.0bht
+```
+##### 成功返回
+```
+{
+  "height": "0",
+  "txhash": "127DE69768E413CDBADB15F3A220DD22FE5D1984F1143D525EBE934A6D4DD171",
+  "raw_log": "[{\"msg_index\":0,\"success\":true,\"log\":\"\",\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"delegate\"}]}]}]",
+  "logs": [
+    {
+      "msg_index": 0,
+      "success": true,
+      "log": "",
+      "events": [
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "action",
+              "value": "delegate"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### 将资产从一个validator 抵押给另外一个validator
+ ```
+bhcli tx staking redelegate [src-validator-addr] [dst-validator-addr] [amount] [flag]
+ ```
+##### 参数说明
+
+
+| 名称 | 类型  | 参数说明 | 
+| ------ | ------ | ------ |
+| src-validator-addr | string | 以bhvaloper开头的源validator地址 |
+| dst-validator-addr | string | 以bhvaloper开头的目的validator地址 |
+| amount | string | 币种以及金额 |
+
+
+##### 示例
+
+```
+bhcli tx staking redelegate bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj bhvaloper136g7jus2k0x7xv7wfusf5npzl5c3uf2cgrwf7z 50000000000000000000bht --from alice --gas-prices 1000000000000.0bht
+```
+##### 成功返回
+```
+{
+  "height": "0",
+  "txhash": "1B72BF06683454C90E4C956B5AE865F782CF9777B71481CA9211CB92236AA7A1",
+  "raw_log": "[{\"msg_index\":0,\"success\":true,\"log\":\"\",\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"begin_redelegate\"}]}]}]",
+  "logs": [
+    {
+      "msg_index": 0,
+      "success": true,
+      "log": "",
+      "events": [
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "action",
+              "value": "begin_redelegate"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
 
 
 ### distribution
+
+#### 设置delegator rewards 的受益地址
+```
+ bhcli tx distribution set-withdraw-addr [withdraw-addr] [flags]
+```
+##### 参数说明
+
+| 名称 | 类型 | 参数说明 |
+| ------ | ------ | ------ |
+| withdraw-addr | string | 以BH开头受益托管单元地址 |
+
+##### 示例
+```
+ bhcli tx distribution set-withdraw-addr BHZQPXRfihTbCpAmkP3EeiDAV5TU31ZiQ5P --from mykey --gas-prices 1000000000000.0bht
+
+```
+
+##### 成功返回
+```
+{
+  "height": "0",
+  "txhash": "24476645A437C61A6560E1B3C12A94A21265223AE20649148EA238BD323C84C8",
+  "raw_log": "[{\"msg_index\":0,\"success\":true,\"log\":\"\",\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"set_withdraw_address\"}]}]}]",
+  "logs": [
+    {
+      "msg_index": 0,
+      "success": true,
+      "log": "",
+      "events": [
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "action",
+              "value": "set_withdraw_address"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### 从某个validator提取抵押收益
+```
+bhcli tx distribution withdraw-rewards [validator-addr] [flags]
+```
+
+##### 参数说明
+
+| 名称 | 类型 | 参数说明 |
+| ------ | ------ | ------ |
+| validator-addr | string | 以bhbhvaloper开头的validator地址 |
+
+##### 示例
+```
+bhcli tx distribution withdraw-rewards bhvaloper1lh86pkhl6nrvmyezmncwdvhmnr0hj6nlk0caaj --from alice --gas-prices 1000000000000.0bht
+```
+
+##### 成功返回
+```
+{
+  "height": "0",
+  "txhash": "FE63EC4BE20EF947F58C847DF935F6951155F4F9DD1AE519A7F9FBAF6925B7F5",
+  "raw_log": "[{\"msg_index\":0,\"success\":true,\"log\":\"\",\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"withdraw_delegator_reward\"}]}]}]",
+  "logs": [
+    {
+      "msg_index": 0,
+      "success": true,
+      "log": "",
+      "events": [
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "action",
+              "value": "withdraw_delegator_reward"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+#### 从所有validator提取抵押收益
+```
+bhcli tx distribution withdraw-all-rewards [flags]
+```
+
+##### 示例
+```
+bhcli tx distribution withdraw-all-rewards --from alice --gas-prices 1000000000000.0bht
+```
+##### 成功返回
+```
+{
+  "height": "0",
+  "txhash": "E8602B91CC973EBB4369277C18364CFB1663BED3F1E565FFBE19C0D2AE47F7BE",
+  "raw_log": "[{\"msg_index\":0,\"success\":true,\"log\":\"\",\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"withdraw_delegator_reward\"}]}]},{\"msg_index\":1,\"success\":true,\"log\":\"\",\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"withdraw_delegator_reward\"},{\"key\":\"action\",\"value\":\"withdraw_delegator_reward\"}]}]}]",
+  "logs": [
+    {
+      "msg_index": 0,
+      "success": true,
+      "log": "",
+      "events": [
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "action",
+              "value": "withdraw_delegator_reward"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "msg_index": 1,
+      "success": true,
+      "log": "",
+      "events": [
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "action",
+              "value": "withdraw_delegator_reward"
+            },
+            {
+              "key": "action",
+              "value": "withdraw_delegator_reward"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
 
 
 ### transfer 
@@ -644,11 +1787,11 @@ bhcli tx transfer send [from] [to][amount][flags]
 ```
 ##### 参数说明
 
-名称 | 类型 | 参数说明
----|---|---|
-from | string| 资产的所有者|
-to | string | 转入的托管单元地址|
-amount| string| 币种以及金额，多个资产是以逗号分隔。例如100bht，2btc|
+| 名称 | 类型  | 参数说明 | 
+| ------ | ------ | ------ |
+| from | string | 资产的所有者 |
+| to | string | 转入的托管单元地址 |
+| amount | string | 币种以及金额，多个资产是以逗号分隔。例如100bht，2btc |
 
 
 
@@ -682,26 +1825,29 @@ bhcli tx transfer send alice  BHZ3uWq8Znb1vLWLtT8EWGrTH424NQkhm7T  1000000000000
     }
   ]
 }
-rogan
+
 ```
 
 #### 将外链资产充值到bhex
 
 ```
-bhcli tx transfer deposit [initiator] [to_cu][to_address][amount][hash][index][memo][height][flags] 
+bhcli tx transfer deposit [from_key_or_address] [toCU_address] [to_address] [coin] [txhash] [index] [memo] [height] [flags]
 ```
 ##### 参数说明
 
-名称 | 类型 | 参数说明
----|---|---|
-initiator | string| 充值的发起人，可以是toCU的所有者也可以是其他人|
-to_cu| string | 被充值的托管单元地址|
-to_address| string | 被充值的托管单元地址对应币种的外链(例如:btc eth)地址|
-amount| string| 币种以及金额|
-hash| string| 外链交易hash|
-index|uint64| 外链交易索引，对于utxo类型资产, index 等于Vout中的index值;对于账户类型资产，index = 0 |
-memo|string| 外链交易中附带的memo
-height|uint64| 外链交易发生的区块高度
+| 名称 | 类型  | 参数说明 | 
+| ------ | ------ | ------ |
+| from_key_or_address | string | 充值的发起人，可以是toCU的所有者也可以是其他人 |
+| to_cu | string | 被充值的托管单元地址 |
+| to_address | string | 被充值的托管单元地址对应币种的外链(例如:btc eth)地址 |
+| amount | string | 币种以及金额 |
+| hash | string | 外链交易hash |
+| index | string | 外链交易索引，对于utxo类型资产, index 等于Vout中的index值;对于账户类型资产，index = 0 |
+| memo | string | 外链交易中附带的memo |
+| height | string | 外链交易发生的区块高度 |
+
+
+
 
 ##### 示例
 ```
@@ -740,16 +1886,17 @@ events: []
 
 #### 将资产提现到外链地址
 ```
-bhcli tx transfer withdrawal [from] [to_address][amount][gas][flags]
+bhcli tx transfer withdrawal [from_key_or_address] [to_address] [amount] [gas] [flags]
 ```
 ##### 参数说明
 
-名称 | 类型 | 参数说明
----|---|---|
-from | string| 资产的所有者|
-to_address | string | 提现的目的地址|
-amount| string| 币种以及金额|
-gas|string|以外链主链币计价的gas，比如提eth需要支付eth，提erc20 资产也需支付eth |
+| 名称 | 类型  | 参数说明 | 
+| ------ | ------ | ------ |
+| from_key_or_address | string | 充值的发起人，可以是toCU的所有者也可以是其他人 |
+| to_address | string | 被充值的托管单元地址对应币种的外链(例如:btc eth)地址 |
+| amount | string | 币种以及金额 |
+| gas | string | 以外链币计价的手续费 |
+
 
 ##### 示例
 ```
@@ -784,6 +1931,27 @@ bhcli tx transfer withdrawal --chain-id bhchain-testnet alice  0xc96d141c9110a8E
 ```
 
 ## rest-server
+从本地启动一个rest server
+```
+bhcli rest-server [flags] 
+```
+| 名称 | 类型  | flag说明 | 
+| ------ | ------ | ------ |
+| laddr string | string | rest server监听地址，(default "tcp://localhost:1317") |
+| max-open | uint | 最大连接数 |
+| node | string | 链节点地址<host>:<port>，(default "tcp://localhost:26657") |
+| trust-node | string | 信任连接的节点 |
+
+
+### 示例
+```shell
+bhcli rest-server --home node0/bhcli --chain-id bhchain-testnet --node tcp://127.0.0.1:26657 --trust-node true 
+```
+### 正常返回
+```
+I[2020-03-14|09:18:04.726] Starting application REST service (chain-id: "bhchain-testnet")... module=rest-server
+I[2020-03-14|09:18:04.727] Starting RPC HTTP server on 127.0.0.1:1317   module=rest-server
+```
 
 ## keys
 
@@ -898,7 +2066,37 @@ Key deleted forever (uh oh!)
 bhcli keys import alice ./alice.pri 
 Enter passphrase to decrypt your key:<输入密码>
 ```
-
 ## version
+显示version信息
+
+##### 示例
+
+##### 成功返回
 
 ## help
+显示help信息
+
+##### 示例
+```
+bhcli help
+```
+##### 成功返回
+```
+Command line interface for interacting with bhchain
+
+Usage:
+  bhcli [command]
+
+Available Commands:
+  status      Query remote node for status
+  config      Create or query an application CLI configuration file
+  query       Querying subcommands
+  tx          Transactions subcommands
+
+  rest-server Start LCD (light-client daemon), a local REST server
+
+  keys        Add or view local private keys
+
+  version     Print the app version
+  help        Help about any command
+```

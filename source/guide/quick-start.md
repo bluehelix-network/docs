@@ -1,13 +1,18 @@
 # 快速启动
 
-由于测试网在快速迭代开发中，我们现在提供预编译好的可执行文件，请通过[官方渠道](https://github.com/bluehelix-network/testnet/blob/v0.1.1/v0.1.1)下载，目前测试网使用的软件版本为 v0.1.1。
+由于测试网在快速迭代开发中，我们现在提供预编译好的可执行文件，请通过[官方渠道](https://github.com/bluehelix-network/testnet)下载，目前测试网使用的软件版本为 v0.1.1。
 
-测试网的跨链资产仅支持BTC测试网，以太坊Ropsten测试网，其中ERC20代币仅支持Ropsten测试网的合约地址（TODO: ERC20代币合约地址）。充入其他资产将无法找回，请谨慎操作。
+测试网的跨链资产仅支持BTC测试网，以太坊Ropsten测试网，其中ERC20代币仅支持Ropsten测试网的合约地址[0xC9476A4919a7E5c7e1760b68F945971769D5c1D8](https://ropsten.etherscan.io/address/0xc9476a4919a7e5c7e1760b68f945971769d5c1d8)。充入其他资产将无法找回，请谨慎操作。
 
-## 启动币核链全节点
+## 加入币核链测试网
+克隆[testnet 项目](https://github.com/bluehelix-network/testnet)到本地:
 
-### 下载配置文件与创世文件
-下载 [仓库](https://github.com/bluehelix-network/testnet/tree/v0.1.1/v0.1.1) 中的 config 目录到本地的 `$HOME/.bhchain` 目录下。在 `$HOME/.bhchain/config/config.toml` 配置文件中对节点的别名 `moniker` 进行编辑：  
+```
+git clone https://github.com/bluehelix-network/testnet.git
+```
+
+### 设置配置文件与创世文件
+将 testnet 中的 config 目录拷贝到本地的 `$HOME/.bhchain` 目录下。在 `$HOME/.bhchain/config/config.toml` 配置文件中对节点的别名 `moniker` 进行编辑：  
 
 ```
 # A custom human readable name for this node
@@ -16,24 +21,29 @@ moniker = "<your_custom_moniker>"
 
 ### 启动节点
 #### 使用二进制程序启动
-连入测试网需要在本地启动两个可执行程序：bhchain 和 chainnode。从[仓库](https://github.com/bluehelix-network/testnet/tree/v0.1.1/v0.1.1)中下载对应操作系统版本的可执行文件到本地。
-  
-[下载 chainnode 配置文件 config.yml](https://github.com/bluehelix-network/testnet/blob/v0.1.1/v0.1.1/chainnode/config.yml)，启动 chainnode:
+连入测试网需要在本地启动两个可执行程序：bhchain 和 chainnode。  
+进入 testnet 项目中的 chainnode 目录，根据操作系统执行对应版本的可执行文件来启动 chainnode:
 
 ```
-./chainnode -c config.yml
+# mac 
+./darwin-amd64/chainnode -c config.yml
+
+# linux
+./linux-amd64/chainnode -c config.yml
 ```
 
-启动 bhchain:
+进入 bhchain 目录，根据操作系统执行对应版本的可执行文件来启动 bhchain:
 
 ```
-./bhchain start --home ~/.bhchain --chainnode-url 127.0.0.1:8888
+# mac
+./darwin-amd64/bhchain start --home ~/.bhchain --chainnode-url 127.0.0.1:8888
+
+# linux
+./linux-amd64/bhchain start --home ~/.bhchain --chainnode-url 127.0.0.1:8888
 ```
 
 #### 使用 docker 启动
-[下载 docker-compose.yml](https://github.com/bluehelix-network/testnet/blob/v0.1.1/v0.1.1/docker-compose.yml)，
-
-然后，执行命令
+进入 testnet 项目，执行命令
 
 ```
 docker-compose -f docker-compose.yml up -d
